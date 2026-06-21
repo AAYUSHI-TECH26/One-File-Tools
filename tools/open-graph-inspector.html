@@ -1,0 +1,2229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OG Inspector — Open Graph & Rich Preview Analyzer</title>
+    <style>
+      /* Google Fonts — curated font stack */
+      @import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+
+      /* ============================================================
+   1. CSS VARIABLES & DESIGN TOKENS
+   ============================================================ */
+      :root {
+        /* Colors - Light Mode */
+        --bg-primary: #f8f9fc;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #f1f3f9;
+        --bg-card: rgba(255, 255, 255, 0.85);
+        --bg-glass: rgba(255, 255, 255, 0.6);
+        --bg-input: #f4f5f9;
+        --bg-hover: #eef0f6;
+        --bg-code: #f4f5f9;
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --text-tertiary: #94a3b8;
+        --text-inverse: #ffffff;
+        --border-color: rgba(15, 23, 42, 0.08);
+        --border-strong: rgba(15, 23, 42, 0.14);
+        --accent: #6366f1;
+        --accent-hover: #4f46e5;
+        --accent-light: rgba(99, 102, 241, 0.1);
+        --accent-glow: rgba(99, 102, 241, 0.25);
+        --success: #10b981;
+        --success-light: rgba(16, 185, 129, 0.1);
+        --warning: #f59e0b;
+        --warning-light: rgba(245, 158, 11, 0.1);
+        --error: #ef4444;
+        --error-light: rgba(239, 68, 68, 0.1);
+        --info: #3b82f6;
+        --info-light: rgba(59, 130, 246, 0.1);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
+        --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.1);
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 20px;
+        --radius-pill: 9999px;
+        --font-sans: "Quicksand", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-display: "Montserrat", "Quicksand", sans-serif;
+        --font-heading: "Oxanium", "Montserrat", sans-serif;
+        --font-ui: "Nunito", "Quicksand", sans-serif;
+        --font-data: "Rajdhani", "Oxanium", sans-serif;
+        --font-mono: "Rajdhani", "SF Mono", monospace;
+        --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+        --header-gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+        --score-excellent: #10b981;
+        --score-good: #3b82f6;
+        --score-fair: #f59e0b;
+        --score-poor: #ef4444;
+      }
+
+      /* Dark Mode */
+      [data-theme="dark"] {
+        --bg-primary: #0b0f1a;
+        --bg-secondary: #131828;
+        --bg-tertiary: #1a2035;
+        --bg-card: rgba(19, 24, 40, 0.85);
+        --bg-glass: rgba(19, 24, 40, 0.6);
+        --bg-input: #1a2035;
+        --bg-hover: #1e2540;
+        --bg-code: #1a2035;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --text-tertiary: #64748b;
+        --text-inverse: #0f172a;
+        --border-color: rgba(241, 245, 249, 0.08);
+        --border-strong: rgba(241, 245, 249, 0.14);
+        --accent: #818cf8;
+        --accent-hover: #6366f1;
+        --accent-light: rgba(129, 140, 248, 0.12);
+        --accent-glow: rgba(129, 140, 248, 0.3);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.35);
+        --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.4);
+      }
+
+      /* ============================================================
+   2. RESET & BASE STYLES
+   ============================================================ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        transition:
+          background var(--transition-base),
+          color var(--transition-base);
+      }
+
+      /* ============================================================
+   3. LAYOUT STYLES
+   ============================================================ */
+      .app-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px 60px;
+      }
+
+      /* ============================================================
+   4. HEADER & NAV
+   ============================================================ */
+      .app-header {
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg-primary);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 32px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-heading);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-decoration: none;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--header-gradient);
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: var(--font-heading);
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .theme-toggle,
+      .kbd-hint-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        transition: all var(--transition-fast);
+      }
+
+      .theme-toggle:hover,
+      .kbd-hint-btn:hover {
+        background: var(--bg-hover);
+        border-color: var(--border-strong);
+        color: var(--text-primary);
+      }
+
+      /* ============================================================
+   5. HERO / INPUT SECTION
+   ============================================================ */
+      .hero {
+        text-align: center;
+        padding: 20px 0 40px;
+      }
+
+      .hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        margin-bottom: 10px;
+        background: var(--header-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero p {
+        font-family: var(--font-ui);
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        font-weight: 400;
+        max-width: 540px;
+        margin: 0 auto 28px;
+        line-height: 1.7;
+      }
+
+      /* Input mode tabs */
+      .input-mode-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+        margin-bottom: 16px;
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-pill);
+        padding: 4px;
+        display: inline-flex;
+      }
+
+      .input-mode-tab {
+        padding: 8px 20px;
+        border-radius: var(--radius-pill);
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        font-family: var(--font-ui);
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        letter-spacing: 0.01em;
+      }
+
+      .input-mode-tab.active {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .input-mode-tab:hover:not(.active) {
+        color: var(--text-primary);
+      }
+
+      /* Input container */
+      .input-container {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      .url-input-wrapper {
+        display: flex;
+        gap: 8px;
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 6px;
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .url-input-wrapper:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-glow);
+      }
+
+      .url-input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 12px 16px;
+        font-size: 1rem;
+        color: var(--text-primary);
+        outline: none;
+        font-family: var(--font-ui);
+        font-weight: 500;
+        min-width: 0;
+      }
+
+      .url-input::placeholder {
+        color: var(--text-tertiary);
+      }
+
+      /* HTML textarea input */
+      .html-input-wrapper {
+        display: none;
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 6px;
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .html-input-wrapper:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-glow);
+      }
+
+      .html-input-wrapper.active {
+        display: block;
+      }
+
+      .html-textarea {
+        width: 100%;
+        min-height: 160px;
+        border: none;
+        background: transparent;
+        padding: 12px 16px;
+        font-family: var(--font-data);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        outline: none;
+        resize: vertical;
+        line-height: 1.5;
+      }
+
+      .html-textarea::placeholder {
+        color: var(--text-tertiary);
+      }
+
+      /* Buttons row */
+      .btn-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px 22px;
+        border-radius: var(--radius-pill);
+        font-family: var(--font-ui);
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        white-space: nowrap;
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 2px 8px var(--accent-glow);
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        background: var(--accent-hover);
+        box-shadow: 0 4px 16px var(--accent-glow);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+      }
+
+      .btn-secondary:hover:not(:disabled) {
+        background: var(--bg-hover);
+        color: var(--text-primary);
+        border-color: var(--border-strong);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-secondary);
+      }
+
+      .btn-ghost:hover:not(:disabled) {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+      }
+
+      /* Loading spinner */
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+        display: none;
+      }
+
+      .btn.loading .spinner {
+        display: block;
+      }
+      .btn.loading .btn-text {
+        display: none;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ============================================================
+   6. CORS NOTICE
+   ============================================================ */
+      .cors-notice {
+        display: none;
+        max-width: 720px;
+        margin: 16px auto 0;
+        background: var(--warning-light);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        border-radius: var(--radius-md);
+        padding: 16px 20px;
+        font-family: var(--font-ui);
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      .cors-notice.visible {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .cors-notice h4 {
+        font-family: var(--font-heading);
+        margin-bottom: 8px;
+        color: var(--warning);
+        letter-spacing: 0.02em;
+      }
+
+      .cors-notice code {
+        background: var(--bg-code);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+      }
+
+      .cors-notice ol {
+        padding-left: 20px;
+        margin: 8px 0;
+      }
+
+      .cors-notice li {
+        margin-bottom: 4px;
+      }
+
+      .cors-notice .switch-link {
+        color: var(--accent);
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+
+      /* ============================================================
+   7. RESULTS SECTION
+   ============================================================ */
+      .results-section {
+        display: none;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .results-section.visible {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Score overview */
+      .score-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .score-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        text-align: center;
+        backdrop-filter: blur(8px);
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .score-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
+
+      .score-ring {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 10px;
+        position: relative;
+      }
+
+      .score-ring svg {
+        transform: rotate(-90deg);
+        width: 72px;
+        height: 72px;
+      }
+
+      .score-ring .ring-bg {
+        fill: none;
+        stroke: var(--bg-tertiary);
+        stroke-width: 6;
+      }
+
+      .score-ring .ring-fill {
+        fill: none;
+        stroke-width: 6;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .score-ring .score-value {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-data);
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .score-card .score-label {
+        font-family: var(--font-ui);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      /* Results grid */
+      .results-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      @media (min-width: 768px) {
+        .results-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .results-grid .full-width {
+          grid-column: 1 / -1;
+        }
+      }
+
+      /* Cards */
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        backdrop-filter: blur(8px);
+        box-shadow: var(--shadow-sm);
+        transition: all var(--transition-fast);
+      }
+
+      .card:hover {
+        box-shadow: var(--shadow-md);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .card-title {
+        font-family: var(--font-heading);
+        font-size: 0.95rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .card-title .icon {
+        width: 28px;
+        height: 28px;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+      }
+
+      .card-badge {
+        padding: 3px 10px;
+        border-radius: var(--radius-pill);
+        font-family: var(--font-data);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .badge-success {
+        background: var(--success-light);
+        color: var(--success);
+      }
+      .badge-warning {
+        background: var(--warning-light);
+        color: var(--warning);
+      }
+      .badge-error {
+        background: var(--error-light);
+        color: var(--error);
+      }
+      .badge-info {
+        background: var(--info-light);
+        color: var(--info);
+      }
+
+      .card-body {
+        padding: 16px 20px;
+      }
+
+      /* Meta rows */
+      .meta-row {
+        display: flex;
+        align-items: flex-start;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+        gap: 12px;
+      }
+
+      .meta-row:last-child {
+        border-bottom: none;
+      }
+
+      .meta-key {
+        min-width: 130px;
+        font-family: var(--font-data);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-tertiary);
+        padding-top: 2px;
+        flex-shrink: 0;
+        letter-spacing: 0.03em;
+      }
+
+      .meta-value {
+        flex: 1;
+        font-family: var(--font-ui);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        word-break: break-word;
+      }
+
+      .meta-value.missing {
+        color: var(--text-tertiary);
+        font-style: italic;
+      }
+
+      .meta-value a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .meta-value a:hover {
+        text-decoration: underline;
+      }
+
+      /* ============================================================
+   8. SOCIAL PREVIEWS
+   ============================================================ */
+      .preview-tabs {
+        display: flex;
+        gap: 4px;
+        padding: 4px;
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-pill);
+        margin-bottom: 16px;
+      }
+
+      .preview-tab {
+        padding: 6px 16px;
+        border-radius: var(--radius-pill);
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        font-family: var(--font-ui);
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+      }
+
+      .preview-tab.active {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* Facebook preview */
+      .fb-preview {
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        max-width: 500px;
+      }
+
+      .fb-preview-image {
+        width: 100%;
+        aspect-ratio: 1.91/1;
+        background: var(--bg-tertiary);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-tertiary);
+        font-size: 0.85rem;
+      }
+
+      .fb-preview-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .fb-preview-info {
+        padding: 12px 14px;
+        background: var(--bg-tertiary);
+      }
+
+      .fb-preview-domain {
+        font-family: var(--font-data);
+        font-size: 0.78rem;
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 2px;
+      }
+
+      .fb-preview-title {
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 2px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .fb-preview-desc {
+        font-family: var(--font-ui);
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* Twitter preview */
+      .tw-preview {
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        max-width: 500px;
+      }
+
+      .tw-preview.summary-large .tw-preview-image {
+        width: 100%;
+        aspect-ratio: 2/1;
+      }
+
+      .tw-preview.summary {
+        display: flex;
+        min-height: 120px;
+      }
+
+      .tw-preview.summary .tw-preview-image {
+        width: 130px;
+        flex-shrink: 0;
+      }
+
+      .tw-preview-image {
+        background: var(--bg-tertiary);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-tertiary);
+        font-size: 0.85rem;
+      }
+
+      .tw-preview-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .tw-preview-info {
+        padding: 12px 14px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .tw-preview-domain {
+        font-family: var(--font-data);
+        font-size: 0.8rem;
+        color: var(--text-tertiary);
+        margin-bottom: 2px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        letter-spacing: 0.02em;
+      }
+
+      .tw-preview-title {
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 2px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .tw-preview-desc {
+        font-family: var(--font-ui);
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* LinkedIn preview */
+      .li-preview {
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        max-width: 500px;
+      }
+
+      .li-preview-image {
+        width: 100%;
+        aspect-ratio: 1.91/1;
+        background: var(--bg-tertiary);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-tertiary);
+        font-size: 0.85rem;
+      }
+
+      .li-preview-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .li-preview-info {
+        padding: 10px 14px;
+        background: var(--bg-tertiary);
+      }
+
+      .li-preview-title {
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 2px;
+      }
+
+      .li-preview-domain {
+        font-family: var(--font-data);
+        font-size: 0.78rem;
+        color: var(--text-tertiary);
+        letter-spacing: 0.02em;
+      }
+
+      /* ============================================================
+   9. VALIDATION & WARNINGS
+   ============================================================ */
+      .validation-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .validation-item:last-child {
+        border-bottom: none;
+      }
+
+      .validation-icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .validation-icon.pass {
+        background: var(--success-light);
+        color: var(--success);
+      }
+      .validation-icon.warn {
+        background: var(--warning-light);
+        color: var(--warning);
+      }
+      .validation-icon.fail {
+        background: var(--error-light);
+        color: var(--error);
+      }
+      .validation-icon.info {
+        background: var(--info-light);
+        color: var(--info);
+      }
+
+      .validation-text {
+        flex: 1;
+        font-family: var(--font-ui);
+        font-size: 0.85rem;
+      }
+
+      .validation-text strong {
+        font-weight: 700;
+      }
+
+      .validation-text .sub {
+        display: block;
+        color: var(--text-secondary);
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        margin-top: 2px;
+      }
+
+      /* ============================================================
+   10. IMAGE INSPECTOR
+   ============================================================ */
+      .image-inspector {
+        text-align: center;
+      }
+
+      .image-inspector .img-preview {
+        max-width: 100%;
+        max-height: 240px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        margin-bottom: 12px;
+        object-fit: contain;
+        background: var(--bg-tertiary);
+      }
+
+      .image-meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 8px;
+      }
+
+      .image-meta-item {
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-sm);
+        padding: 10px;
+      }
+
+      .image-meta-item .label {
+        font-family: var(--font-data);
+        font-size: 0.72rem;
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 600;
+      }
+
+      .image-meta-item .value {
+        font-family: var(--font-data);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: 0.02em;
+      }
+
+      /* ============================================================
+   11. EXPORT BAR
+   ============================================================ */
+      .export-bar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* ============================================================
+   12. TOAST NOTIFICATIONS
+   ============================================================ */
+      .toast-container {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .toast {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 12px 20px;
+        box-shadow: var(--shadow-lg);
+        font-family: var(--font-ui);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        animation:
+          toastIn 0.3s ease,
+          toastOut 0.3s ease 2.7s forwards;
+        max-width: 340px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      @keyframes toastIn {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes toastOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+      }
+
+      /* ============================================================
+   13. SKELETON LOADING
+   ============================================================ */
+      .skeleton {
+        background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--bg-hover) 50%, var(--bg-tertiary) 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: var(--radius-sm);
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      .skeleton-text {
+        height: 14px;
+        margin-bottom: 8px;
+      }
+      .skeleton-text:last-child {
+        width: 60%;
+      }
+      .skeleton-block {
+        height: 100px;
+        margin-bottom: 12px;
+      }
+
+      /* ============================================================
+   14. EMPTY STATE
+   ============================================================ */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-tertiary);
+      }
+
+      .empty-state .empty-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        opacity: 0.4;
+      }
+
+      .empty-state h3 {
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+      }
+
+      .empty-state p {
+        font-family: var(--font-ui);
+        font-size: 0.875rem;
+      }
+
+      /* ============================================================
+   15. KEYBOARD SHORTCUTS MODAL
+   ============================================================ */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 10000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.2s ease;
+      }
+
+      .modal-overlay.visible {
+        display: flex;
+      }
+
+      .modal {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl);
+        padding: 28px;
+        max-width: 420px;
+        width: 90%;
+        box-shadow: var(--shadow-xl);
+      }
+
+      .modal h3 {
+        font-family: var(--font-heading);
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .shortcut-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .shortcut-row:last-child {
+        border-bottom: none;
+      }
+
+      .shortcut-label {
+        font-family: var(--font-ui);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      kbd {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 3px 8px;
+        font-family: var(--font-data);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        box-shadow: 0 1px 0 var(--border-strong);
+      }
+
+      /* ============================================================
+   16. RESPONSIVE
+   ============================================================ */
+      @media (max-width: 640px) {
+        .app-header {
+          padding: 12px 0;
+          margin-bottom: 20px;
+        }
+        .hero {
+          padding: 10px 0 24px;
+        }
+        .url-input-wrapper {
+          flex-direction: column;
+        }
+        .btn-row {
+          flex-direction: column;
+        }
+        .btn-row .btn {
+          width: 100%;
+        }
+        .score-overview {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .meta-row {
+          flex-direction: column;
+          gap: 4px;
+        }
+        .meta-key {
+          min-width: auto;
+        }
+        .preview-tabs {
+          flex-wrap: wrap;
+        }
+        .tw-preview.summary {
+          flex-direction: column;
+        }
+        .tw-preview.summary .tw-preview-image {
+          width: 100%;
+          aspect-ratio: 2/1;
+        }
+      }
+
+      /* ============================================================
+   17. SCROLLBAR
+   ============================================================ */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border-strong);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-tertiary);
+      }
+
+      /* ============================================================
+   18. MISC UTILITIES
+   ============================================================ */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+      .mt-sm {
+        margin-top: 8px;
+      }
+      .mt-md {
+        margin-top: 16px;
+      }
+      .text-mono {
+        font-family: var(--font-data);
+        font-size: 0.85rem;
+        letter-spacing: 0.02em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- ========== HEADER ========== -->
+      <header class="app-header">
+        <a href="#" class="logo" onclick="return false;">
+          <div class="logo-icon">OG</div>
+          <span>OG Inspector</span>
+        </a>
+        <div class="header-actions">
+          <button class="kbd-hint-btn" onclick="toggleShortcuts()" title="Keyboard shortcuts">
+            <span>&#x2328;</span>
+          </button>
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+            <span id="themeIcon">&#9790;</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ========== HERO / INPUT ========== -->
+      <section class="hero">
+        <h1>Open Graph Inspector</h1>
+        <p>Analyze meta tags, social previews, and SEO metadata for any URL. Get actionable recommendations instantly.</p>
+
+        <div style="display: flex; justify-content: center; margin-bottom: 16px">
+          <div class="input-mode-tabs">
+            <button class="input-mode-tab active" data-mode="url" onclick="switchInputMode('url')">URL</button>
+            <button class="input-mode-tab" data-mode="html" onclick="switchInputMode('html')">Paste HTML</button>
+          </div>
+        </div>
+
+        <div class="input-container">
+          <div class="url-input-wrapper" id="urlInputWrapper">
+            <input type="url" class="url-input" id="urlInput" placeholder="Enter a URL to inspect (e.g. https://example.com)" spellcheck="false" autocomplete="off" />
+          </div>
+          <div class="html-input-wrapper" id="htmlInputWrapper">
+            <textarea class="html-textarea" id="htmlInput" placeholder="Paste the full HTML source of the page here...&#10;&#10;Tip: Right-click on a page &#x2192; View Page Source &#x2192; Select All &#x2192; Copy"></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" onclick="pasteFromClipboard()" id="pasteBtn">
+              <span class="btn-text">&#x1f4cb; Paste</span>
+            </button>
+            <button class="btn btn-primary" onclick="analyze()" id="analyzeBtn">
+              <span class="spinner"></span>
+              <span class="btn-text">Analyze</span>
+            </button>
+            <button class="btn btn-ghost" onclick="clearAll()" id="clearBtn">Clear</button>
+          </div>
+        </div>
+
+        <div class="cors-notice" id="corsNotice">
+          <h4>&#x26A0; Could not fetch the URL directly</h4>
+          <p>This is usually caused by <strong>CORS restrictions</strong> &mdash; the target server doesn't allow browser-based requests from other origins.</p>
+          <p><strong>How to fix it:</strong></p>
+          <ol>
+            <li>Open the URL in a new browser tab.</li>
+            <li>Right-click the page and choose <strong>View Page Source</strong> (or press <kbd>Ctrl</kbd>+<kbd>U</kbd> / <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>U</kbd>).</li>
+            <li>Select all the HTML (<kbd>Ctrl</kbd>+<kbd>A</kbd> / <kbd>Cmd</kbd>+<kbd>A</kbd>) and copy it.</li>
+            <li><span class="switch-link" onclick="switchInputMode('html')">Switch to Paste HTML mode</span> and paste the source here.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ========== RESULTS ========== -->
+      <section class="results-section" id="resultsSection">
+        <!-- Scores -->
+        <div class="score-overview" id="scoreOverview"></div>
+
+        <!-- Results Grid -->
+        <div class="results-grid" id="resultsGrid"></div>
+      </section>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Keyboard shortcuts modal -->
+    <div class="modal-overlay" id="shortcutsModal">
+      <div class="modal">
+        <h3>Keyboard Shortcuts</h3>
+        <div class="shortcut-row"><span class="shortcut-label">Analyze URL</span><kbd>Enter</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-label">Paste from clipboard</span><kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-label">Clear all</span><kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-label">Toggle theme</span><kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-label">Copy as JSON</span><kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-label">Close modal</span><kbd>Esc</kbd></div>
+        <div class="mt-md" style="text-align: right">
+          <button class="btn btn-secondary" onclick="toggleShortcuts()">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ============================================================
+   JAVASCRIPT — OG INSPECTOR
+   ============================================================ */
+
+      /* -------------------------------------------------------
+   1. STATE
+   ------------------------------------------------------- */
+      let currentMode = "url"; // 'url' or 'html'
+      let lastResult = null; // stores the last parsed metadata
+      let analyzedUrl = ""; // the URL that was analyzed
+
+      /* -------------------------------------------------------
+   2. THEME
+   ------------------------------------------------------- */
+      function getPreferredTheme() {
+        const stored = localStorage.getItem("og-theme");
+        if (stored) return stored;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        document.getElementById("themeIcon").innerHTML = theme === "dark" ? "&#9788;" : "&#9790;";
+        localStorage.setItem("og-theme", theme);
+      }
+
+      function toggleTheme() {
+        const current = document.documentElement.getAttribute("data-theme") || "light";
+        applyTheme(current === "dark" ? "light" : "dark");
+      }
+
+      applyTheme(getPreferredTheme());
+
+      /* -------------------------------------------------------
+   3. INPUT MODE SWITCHING
+   ------------------------------------------------------- */
+      function switchInputMode(mode) {
+        currentMode = mode;
+        document.querySelectorAll(".input-mode-tab").forEach((t) => t.classList.toggle("active", t.dataset.mode === mode));
+        document.getElementById("urlInputWrapper").style.display = mode === "url" ? "flex" : "none";
+        document.getElementById("htmlInputWrapper").classList.toggle("active", mode === "html");
+        document.getElementById("corsNotice").classList.remove("visible");
+      }
+
+      /* -------------------------------------------------------
+   4. CLIPBOARD PASTE
+   ------------------------------------------------------- */
+      async function pasteFromClipboard() {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (currentMode === "url") {
+            document.getElementById("urlInput").value = text.trim();
+          } else {
+            document.getElementById("htmlInput").value = text;
+          }
+          toast("Pasted from clipboard");
+        } catch {
+          toast("Could not read clipboard. Please paste manually.", "warn");
+        }
+      }
+
+      /* -------------------------------------------------------
+   5. CLEAR
+   ------------------------------------------------------- */
+      function clearAll() {
+        document.getElementById("urlInput").value = "";
+        document.getElementById("htmlInput").value = "";
+        document.getElementById("resultsSection").classList.remove("visible");
+        document.getElementById("corsNotice").classList.remove("visible");
+        lastResult = null;
+        analyzedUrl = "";
+        toast("Cleared");
+      }
+
+      /* -------------------------------------------------------
+   6. TOAST NOTIFICATIONS
+   ------------------------------------------------------- */
+      function toast(msg, type) {
+        const c = document.getElementById("toastContainer");
+        const t = document.createElement("div");
+        t.className = "toast";
+        const icons = { warn: "\u26A0\uFE0F", error: "\u274C", success: "\u2705" };
+        t.innerHTML = (icons[type] || "\u2705") + " " + msg;
+        c.appendChild(t);
+        setTimeout(() => t.remove(), 3200);
+      }
+
+      /* -------------------------------------------------------
+   7. SHORTCUTS MODAL
+   ------------------------------------------------------- */
+      function toggleShortcuts() {
+        document.getElementById("shortcutsModal").classList.toggle("visible");
+      }
+
+      /* -------------------------------------------------------
+   8. KEYBOARD SHORTCUTS
+   ------------------------------------------------------- */
+      document.addEventListener("keydown", (e) => {
+        const mod = e.metaKey || e.ctrlKey;
+
+        // Enter -> analyze
+        if (e.key === "Enter" && !e.shiftKey && document.activeElement === document.getElementById("urlInput")) {
+          e.preventDefault();
+          analyze();
+          return;
+        }
+
+        // Escape -> close modal
+        if (e.key === "Escape") {
+          document.getElementById("shortcutsModal").classList.remove("visible");
+          return;
+        }
+
+        if (mod && e.shiftKey) {
+          switch (e.key.toUpperCase()) {
+            case "V":
+              e.preventDefault();
+              pasteFromClipboard();
+              break;
+            case "X":
+              e.preventDefault();
+              clearAll();
+              break;
+            case "D":
+              e.preventDefault();
+              toggleTheme();
+              break;
+            case "C":
+              e.preventDefault();
+              copyAsJSON();
+              break;
+          }
+        }
+      });
+
+      /* -------------------------------------------------------
+   9. URL UTILITIES
+   ------------------------------------------------------- */
+      function getDomain(url) {
+        try {
+          return new URL(url).hostname;
+        } catch {
+          return url;
+        }
+      }
+
+      function ensureAbsoluteUrl(url, base) {
+        if (!url) return "";
+        if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("//")) {
+          return url.startsWith("//") ? "https:" + url : url;
+        }
+        try {
+          return new URL(url, base).href;
+        } catch {
+          return url;
+        }
+      }
+
+      /* -------------------------------------------------------
+   10. HTML PARSING — METADATA EXTRACTION
+   ------------------------------------------------------- */
+      function extractMetadata(htmlString, sourceUrl) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, "text/html");
+
+        /** Helper: get content of a meta tag */
+        function meta(attr, value) {
+          const el = doc.querySelector(`meta[${attr}="${value}"]`);
+          return el ? el.getAttribute("content") || el.getAttribute("value") || "" : "";
+        }
+
+        /** Helper: get all matching meta tags */
+        function metaAll(attr, prefix) {
+          const result = {};
+          doc.querySelectorAll(`meta[${attr}]`).forEach((el) => {
+            const name = el.getAttribute(attr);
+            if (name && name.startsWith(prefix)) {
+              result[name] = el.getAttribute("content") || el.getAttribute("value") || "";
+            }
+          });
+          return result;
+        }
+
+        /* Title */
+        const titleTag = doc.querySelector("title");
+        const titleText = titleTag ? titleTag.textContent.trim() : "";
+
+        /* Canonical */
+        const canonicalEl = doc.querySelector('link[rel="canonical"]');
+        const canonical = canonicalEl ? canonicalEl.getAttribute("href") || "" : "";
+
+        /* Favicon */
+        let favicon = "";
+        const iconLinks = doc.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]');
+        if (iconLinks.length) {
+          favicon = iconLinks[iconLinks.length - 1].getAttribute("href") || "";
+          favicon = ensureAbsoluteUrl(favicon, sourceUrl);
+        }
+
+        /* Open Graph */
+        const og = {
+          title: meta("property", "og:title"),
+          description: meta("property", "og:description"),
+          image: meta("property", "og:image"),
+          url: meta("property", "og:url"),
+          type: meta("property", "og:type"),
+          site_name: meta("property", "og:site_name"),
+          locale: meta("property", "og:locale")
+        };
+        // Make OG image absolute
+        og.image = ensureAbsoluteUrl(og.image, sourceUrl);
+
+        /* Also capture any extra og: tags */
+        const allOg = metaAll("property", "og:");
+
+        /* Twitter Card */
+        const twitter = {
+          card: meta("name", "twitter:card") || meta("property", "twitter:card"),
+          title: meta("name", "twitter:title") || meta("property", "twitter:title"),
+          description: meta("name", "twitter:description") || meta("property", "twitter:description"),
+          image: meta("name", "twitter:image") || meta("property", "twitter:image"),
+          site: meta("name", "twitter:site") || meta("property", "twitter:site")
+        };
+        twitter.image = ensureAbsoluteUrl(twitter.image, sourceUrl);
+
+        /* SEO */
+        const seo = {
+          title: titleText,
+          description: meta("name", "description"),
+          keywords: meta("name", "keywords"),
+          robots: meta("name", "robots"),
+          canonical: canonical
+        };
+
+        /* All meta (for extra reference) */
+        const allMeta = metaAll("name", "");
+        const allProp = metaAll("property", "");
+
+        return { og, twitter, seo, favicon, allOg, allMeta: { ...allMeta, ...allProp } };
+      }
+
+      /* -------------------------------------------------------
+   11. VALIDATION ENGINE
+   ------------------------------------------------------- */
+      function validateMetadata(data) {
+        const checks = [];
+
+        function add(ok, msg, sub, severity) {
+          checks.push({ pass: ok, msg, sub: sub || "", severity: severity || (ok ? "pass" : "warn") });
+        }
+
+        // Open Graph checks
+        add(!!data.og.title, "og:title is set", data.og.title ? `"${data.og.title}"` : "Required for rich previews on Facebook, LinkedIn, etc.", data.og.title ? "pass" : "fail");
+        add(!!data.og.description, "og:description is set", data.og.description ? `${data.og.description.length} characters` : "Required for social sharing previews.", data.og.description ? "pass" : "fail");
+        add(!!data.og.image, "og:image is set", data.og.image ? "" : "Posts with images get significantly more engagement.", data.og.image ? "pass" : "fail");
+        add(!!data.og.url, "og:url is set", data.og.url ? "" : "Helps define the canonical URL for sharing.", data.og.url ? "pass" : "warn");
+        add(!!data.og.type, "og:type is set", data.og.type ? `Type: ${data.og.type}` : 'Defaults to "website". Consider setting explicitly.', data.og.type ? "pass" : "info");
+        add(!!data.og.site_name, "og:site_name is set", "", data.og.site_name ? "pass" : "info");
+
+        // Twitter checks
+        add(!!data.twitter.card, "twitter:card is set", data.twitter.card ? `Type: ${data.twitter.card}` : "Required for Twitter card previews (summary, summary_large_image, etc.).", data.twitter.card ? "pass" : "warn");
+        add(!!data.twitter.title, "twitter:title is set", data.twitter.title ? "" : "Falls back to og:title if not set.", data.twitter.title ? "pass" : "info");
+        add(!!data.twitter.description, "twitter:description is set", "", data.twitter.description ? "pass" : "info");
+        add(!!data.twitter.image, "twitter:image is set", data.twitter.image ? "" : "Falls back to og:image if not set.", data.twitter.image ? "pass" : "info");
+
+        // SEO checks
+        add(!!data.seo.title, "Page <title> is set", data.seo.title ? `${data.seo.title.length} characters` : "Critical for SEO.", data.seo.title ? "pass" : "fail");
+        add(!!data.seo.description, "Meta description is set", data.seo.description ? `${data.seo.description.length} characters` : "Important for search results.", data.seo.description ? "pass" : "warn");
+        add(!!data.seo.canonical, "Canonical URL is set", "", data.seo.canonical ? "pass" : "warn");
+
+        // Length checks
+        if (data.og.title && data.og.title.length > 90) {
+          add(false, "og:title may be too long", `${data.og.title.length} characters. Keep under 60-90 for best display.`, "warn");
+        }
+        if (data.og.description && data.og.description.length < 50) {
+          add(false, "og:description is quite short", `${data.og.description.length} characters. Aim for 100-200 characters.`, "warn");
+        }
+        if (data.og.description && data.og.description.length > 300) {
+          add(false, "og:description may be too long", `${data.og.description.length} characters. Keep under 200-300.`, "warn");
+        }
+        if (data.seo.title && data.seo.title.length > 70) {
+          add(false, "Page title may be too long for search results", `${data.seo.title.length} characters. Aim for 50-60.`, "warn");
+        }
+        if (data.seo.description && data.seo.description.length > 160) {
+          add(false, "Meta description may be truncated in search results", `${data.seo.description.length} characters. Aim for 150-160.`, "warn");
+        }
+        if (data.seo.description && data.seo.description.length < 50) {
+          add(false, "Meta description is quite short", `${data.seo.description.length} characters. Aim for 120-160 characters.`, "warn");
+        }
+
+        return checks;
+      }
+
+      /* -------------------------------------------------------
+   12. SCORING ENGINE
+   ------------------------------------------------------- */
+      function calculateScores(data, checks) {
+        function pct(have, total) {
+          return total === 0 ? 100 : Math.round((have / total) * 100);
+        }
+
+        /* OG Score: title, desc, image, url, type, site_name (weighted) */
+        let ogMax = 0,
+          ogScore = 0;
+        const ogWeights = { title: 25, description: 25, image: 25, url: 10, type: 10, site_name: 5 };
+        for (const [key, w] of Object.entries(ogWeights)) {
+          ogMax += w;
+          if (data.og[key]) ogScore += w;
+        }
+
+        /* Twitter Score */
+        let twMax = 0,
+          twScore = 0;
+        const twWeights = { card: 30, title: 25, description: 20, image: 20, site: 5 };
+        for (const [key, w] of Object.entries(twWeights)) {
+          twMax += w;
+          if (data.twitter[key]) twScore += w;
+        }
+
+        /* SEO Score */
+        let seoMax = 0,
+          seoScore = 0;
+        const seoWeights = { title: 35, description: 30, canonical: 20, robots: 5, keywords: 10 };
+        for (const [key, w] of Object.entries(seoWeights)) {
+          seoMax += w;
+          if (data.seo[key]) seoScore += w;
+        }
+
+        /* Penalty for length violations */
+        const warnings = checks.filter((c) => !c.pass && c.severity === "warn").length;
+        const errors = checks.filter((c) => !c.pass && c.severity === "fail").length;
+
+        const ogPct = pct(ogScore, ogMax);
+        const twPct = pct(twScore, twMax);
+        const seoPct = pct(seoScore, seoMax);
+        let overall = Math.round(ogPct * 0.4 + twPct * 0.25 + seoPct * 0.35);
+        overall = Math.max(0, overall - errors * 3 - warnings * 1);
+
+        return { overall, og: ogPct, twitter: twPct, seo: seoPct };
+      }
+
+      /* -------------------------------------------------------
+   13. ANALYZE — MAIN ENTRY POINT
+   ------------------------------------------------------- */
+      async function analyze() {
+        const btn = document.getElementById("analyzeBtn");
+        const corsNotice = document.getElementById("corsNotice");
+        corsNotice.classList.remove("visible");
+
+        if (currentMode === "url") {
+          let url = document.getElementById("urlInput").value.trim();
+          if (!url) {
+            toast("Please enter a URL", "warn");
+            return;
+          }
+          if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+          document.getElementById("urlInput").value = url;
+          analyzedUrl = url;
+
+          btn.classList.add("loading");
+          btn.disabled = true;
+
+          try {
+            const html = await fetchPage(url);
+            processHTML(html, url);
+          } catch (err) {
+            corsNotice.classList.add("visible");
+            document.getElementById("resultsSection").classList.remove("visible");
+            toast("Fetch failed — try pasting HTML instead", "error");
+          } finally {
+            btn.classList.remove("loading");
+            btn.disabled = false;
+          }
+        } else {
+          const html = document.getElementById("htmlInput").value.trim();
+          if (!html) {
+            toast("Please paste some HTML", "warn");
+            return;
+          }
+          /* Try to infer URL from og:url or canonical */
+          const parser = new DOMParser();
+          const tempDoc = parser.parseFromString(html, "text/html");
+          const ogUrl = tempDoc.querySelector('meta[property="og:url"]');
+          const canonLink = tempDoc.querySelector('link[rel="canonical"]');
+          analyzedUrl = (ogUrl && ogUrl.getAttribute("content")) || (canonLink && canonLink.getAttribute("href")) || "";
+          processHTML(html, analyzedUrl);
+        }
+      }
+
+      /* -------------------------------------------------------
+   14. FETCH PAGE
+   ------------------------------------------------------- */
+      async function fetchPage(url) {
+        /*
+         * When deployed on Cloudflare Pages the /api/fetch function
+         * handles the request server-side — no CORS issues.
+         * When running locally (file://) it falls back to public proxies.
+         */
+        const isDeployed = location.protocol === "https:" || location.protocol === "http:";
+        const attempts = [
+          /* 1. Our own server-side proxy (works when deployed to Cloudflare Pages) */
+          ...(isDeployed
+            ? [
+                () =>
+                  fetch("/api/fetch?url=" + encodeURIComponent(url)).then((r) => {
+                    if (!r.ok) throw new Error(r.status);
+                    return r.text();
+                  })
+              ]
+            : []),
+          /* 2. Direct fetch (works for same-origin or permissive CORS) */
+          () =>
+            fetch(url).then((r) => {
+              if (!r.ok) throw new Error(r.status);
+              return r.text();
+            }),
+          /* 3. Public CORS proxies as last resort */
+          () =>
+            fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url)).then((r) => {
+              if (!r.ok) throw new Error(r.status);
+              return r.text();
+            }),
+          () =>
+            fetch("https://corsproxy.io/?" + encodeURIComponent(url)).then((r) => {
+              if (!r.ok) throw new Error(r.status);
+              return r.text();
+            })
+        ];
+
+        for (const attempt of attempts) {
+          try {
+            return await attempt();
+          } catch {
+            /* try next */
+          }
+        }
+        throw new Error("All fetch methods failed");
+      }
+
+      /* -------------------------------------------------------
+   15. PROCESS HTML & RENDER
+   ------------------------------------------------------- */
+      function processHTML(html, sourceUrl) {
+        const data = extractMetadata(html, sourceUrl);
+        lastResult = data;
+
+        const checks = validateMetadata(data);
+        const scores = calculateScores(data, checks);
+
+        renderScores(scores);
+        renderResults(data, checks, scores, sourceUrl);
+
+        document.getElementById("resultsSection").classList.add("visible");
+        document.getElementById("resultsSection").scrollIntoView({ behavior: "smooth", block: "start" });
+
+        toast("Analysis complete");
+      }
+
+      /* -------------------------------------------------------
+   16. RENDER — SCORES
+   ------------------------------------------------------- */
+      function renderScores(scores) {
+        const container = document.getElementById("scoreOverview");
+        const items = [
+          { label: "Overall", value: scores.overall },
+          { label: "Open Graph", value: scores.og },
+          { label: "Twitter", value: scores.twitter },
+          { label: "SEO", value: scores.seo }
+        ];
+
+        container.innerHTML = items
+          .map((item) => {
+            const color = item.value >= 80 ? "var(--score-excellent)" : item.value >= 60 ? "var(--score-good)" : item.value >= 40 ? "var(--score-fair)" : "var(--score-poor)";
+            const circumference = 2 * Math.PI * 30;
+            const offset = circumference - (item.value / 100) * circumference;
+            return `
+      <div class="score-card">
+        <div class="score-ring">
+          <svg viewBox="0 0 72 72">
+            <circle class="ring-bg" cx="36" cy="36" r="30"/>
+            <circle class="ring-fill" cx="36" cy="36" r="30"
+              stroke="${color}"
+              stroke-dasharray="${circumference}"
+              stroke-dashoffset="${circumference}"
+              data-target="${offset}"/>
+          </svg>
+          <div class="score-value" style="color:${color}">${item.value}</div>
+        </div>
+        <div class="score-label">${item.label}</div>
+      </div>`;
+          })
+          .join("");
+
+        /* Animate rings */
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            container.querySelectorAll(".ring-fill").forEach((el) => {
+              el.style.strokeDashoffset = el.dataset.target;
+            });
+          }, 100);
+        });
+      }
+
+      /* -------------------------------------------------------
+   17. RENDER — RESULTS GRID
+   ------------------------------------------------------- */
+      function renderResults(data, checks, scores, sourceUrl) {
+        const grid = document.getElementById("resultsGrid");
+        const domain = getDomain(sourceUrl || data.og.url || "");
+
+        /* Derive the preview data — fallback chain like social platforms do */
+        const previewTitle = data.og.title || data.twitter.title || data.seo.title || "No title";
+        const previewDesc = data.og.description || data.twitter.description || data.seo.description || "";
+        const previewImage = data.og.image || data.twitter.image || "";
+        const previewDomain = domain || "example.com";
+        const previewSite = data.og.site_name || previewDomain;
+        const twitterCard = data.twitter.card || (previewImage ? "summary_large_image" : "summary");
+
+        grid.innerHTML = "";
+
+        /* ----- Social Previews Card ----- */
+        grid.innerHTML += `
+    <div class="card full-width">
+      <div class="card-header">
+        <span class="card-title"><span class="icon" style="background:var(--info-light);color:var(--info);">&#x1F441;</span> Social Previews</span>
+      </div>
+      <div class="card-body">
+        <div class="preview-tabs" id="previewTabs">
+          <button class="preview-tab active" onclick="showPreview('facebook')">Facebook</button>
+          <button class="preview-tab" onclick="showPreview('twitter')">Twitter / X</button>
+          <button class="preview-tab" onclick="showPreview('linkedin')">LinkedIn</button>
+        </div>
+
+        <!-- Facebook -->
+        <div class="preview-panel" data-preview="facebook">
+          <div class="fb-preview">
+            <div class="fb-preview-image">${previewImage ? `<img src="${escHtml(previewImage)}" alt="OG Image" onerror="this.parentElement.textContent='Image failed to load'">` : "No image set"}</div>
+            <div class="fb-preview-info">
+              <div class="fb-preview-domain">${escHtml(previewDomain)}</div>
+              <div class="fb-preview-title">${escHtml(previewTitle)}</div>
+              <div class="fb-preview-desc">${escHtml(previewDesc)}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Twitter -->
+        <div class="preview-panel" data-preview="twitter" style="display:none">
+          <div class="tw-preview ${twitterCard === "summary_large_image" ? "summary-large" : "summary"}">
+            <div class="tw-preview-image">${previewImage ? `<img src="${escHtml(previewImage)}" alt="Twitter Image" onerror="this.parentElement.textContent='Image failed to load'">` : "No image"}</div>
+            <div class="tw-preview-info">
+              <div class="tw-preview-domain">${escHtml(previewDomain)}</div>
+              <div class="tw-preview-title">${escHtml(data.twitter.title || previewTitle)}</div>
+              <div class="tw-preview-desc">${escHtml(data.twitter.description || previewDesc)}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LinkedIn -->
+        <div class="preview-panel" data-preview="linkedin" style="display:none">
+          <div class="li-preview">
+            <div class="li-preview-image">${previewImage ? `<img src="${escHtml(previewImage)}" alt="LinkedIn Image" onerror="this.parentElement.textContent='Image failed to load'">` : "No image set"}</div>
+            <div class="li-preview-info">
+              <div class="li-preview-title">${escHtml(previewTitle)}</div>
+              <div class="li-preview-domain">${escHtml(previewDomain)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+        /* ----- Open Graph Card ----- */
+        const ogCount = Object.values(data.og).filter(Boolean).length;
+        grid.innerHTML += `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title"><span class="icon" style="background:var(--accent-light);color:var(--accent);">OG</span> Open Graph</span>
+        <span class="card-badge ${ogCount >= 5 ? "badge-success" : ogCount >= 3 ? "badge-warning" : "badge-error"}">${ogCount}/7 tags</span>
+      </div>
+      <div class="card-body">
+        ${renderMetaRows([
+          ["og:title", data.og.title],
+          ["og:description", data.og.description],
+          ["og:image", data.og.image, true],
+          ["og:url", data.og.url, true],
+          ["og:type", data.og.type],
+          ["og:site_name", data.og.site_name],
+          ["og:locale", data.og.locale]
+        ])}
+      </div>
+    </div>`;
+
+        /* ----- Twitter Card ----- */
+        const twCount = Object.values(data.twitter).filter(Boolean).length;
+        grid.innerHTML += `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title"><span class="icon" style="background:#e8f4fd;color:#1da1f2;">&#x1D54F;</span> Twitter Card</span>
+        <span class="card-badge ${twCount >= 4 ? "badge-success" : twCount >= 2 ? "badge-warning" : "badge-error"}">${twCount}/5 tags</span>
+      </div>
+      <div class="card-body">
+        ${renderMetaRows([
+          ["twitter:card", data.twitter.card],
+          ["twitter:title", data.twitter.title],
+          ["twitter:description", data.twitter.description],
+          ["twitter:image", data.twitter.image, true],
+          ["twitter:site", data.twitter.site]
+        ])}
+      </div>
+    </div>`;
+
+        /* ----- SEO Card ----- */
+        const seoCount = Object.values(data.seo).filter(Boolean).length;
+        grid.innerHTML += `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title"><span class="icon" style="background:var(--success-light);color:var(--success);">&#x1F50D;</span> SEO Metadata</span>
+        <span class="card-badge ${seoCount >= 4 ? "badge-success" : seoCount >= 2 ? "badge-warning" : "badge-error"}">${seoCount}/5 tags</span>
+      </div>
+      <div class="card-body">
+        ${renderMetaRows([
+          ["title", data.seo.title],
+          ["description", data.seo.description],
+          ["keywords", data.seo.keywords],
+          ["robots", data.seo.robots],
+          ["canonical", data.seo.canonical, true]
+        ])}
+        ${data.favicon ? `<div class="meta-row"><span class="meta-key">favicon</span><span class="meta-value"><img src="${escHtml(data.favicon)}" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" onerror="this.style.display='none'"><a href="${escHtml(data.favicon)}" target="_blank" rel="noopener">${escHtml(data.favicon)}</a></span></div>` : ""}
+      </div>
+    </div>`;
+
+        /* ----- Validation Card ----- */
+        const failCount = checks.filter((c) => !c.pass).length;
+        grid.innerHTML += `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title"><span class="icon" style="background:${failCount > 0 ? "var(--warning-light)" : "var(--success-light)"};color:${failCount > 0 ? "var(--warning)" : "var(--success)"};">${failCount > 0 ? "&#x26A0;" : "&#x2705;"}</span> Validation</span>
+        <span class="card-badge ${failCount === 0 ? "badge-success" : failCount <= 3 ? "badge-warning" : "badge-error"}">${failCount} issue${failCount !== 1 ? "s" : ""}</span>
+      </div>
+      <div class="card-body">
+        ${checks
+          .map(
+            (c) => `
+          <div class="validation-item">
+            <div class="validation-icon ${c.pass ? "pass" : c.severity}">${c.pass ? "\u2713" : c.severity === "fail" ? "\u2717" : c.severity === "warn" ? "!" : "i"}</div>
+            <div class="validation-text"><strong>${escHtml(c.msg)}</strong>${c.sub ? `<span class="sub">${escHtml(c.sub)}</span>` : ""}</div>
+          </div>`
+          )
+          .join("")}
+      </div>
+    </div>`;
+
+        /* ----- Image Inspector Card ----- */
+        if (previewImage) {
+          grid.innerHTML += `
+      <div class="card full-width">
+        <div class="card-header">
+          <span class="card-title"><span class="icon" style="background:var(--accent-light);color:var(--accent);">&#x1F5BC;</span> Image Inspector</span>
+        </div>
+        <div class="card-body image-inspector">
+          <img class="img-preview" id="ogImagePreview" src="${escHtml(previewImage)}" alt="OG Image Preview" onerror="this.alt='Failed to load image';this.style.minHeight='60px';">
+          <div class="image-meta-grid" id="imageMeta">
+            <div class="image-meta-item"><div class="label">Status</div><div class="value" id="imgStatus">Loading...</div></div>
+            <div class="image-meta-item"><div class="label">Width</div><div class="value" id="imgWidth">-</div></div>
+            <div class="image-meta-item"><div class="label">Height</div><div class="value" id="imgHeight">-</div></div>
+            <div class="image-meta-item"><div class="label">Aspect Ratio</div><div class="value" id="imgRatio">-</div></div>
+          </div>
+        </div>
+      </div>`;
+
+          /* Load image and measure */
+          const testImg = new Image();
+          testImg.crossOrigin = "anonymous";
+          testImg.onload = function () {
+            const w = this.naturalWidth;
+            const h = this.naturalHeight;
+            document.getElementById("imgStatus").textContent = "Loaded";
+            document.getElementById("imgStatus").style.color = "var(--success)";
+            document.getElementById("imgWidth").textContent = w + "px";
+            document.getElementById("imgHeight").textContent = h + "px";
+            const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+            const g = gcd(w, h);
+            document.getElementById("imgRatio").textContent = w / g + ":" + h / g;
+
+            /* Warn if image is too small for social */
+            if (w < 1200 || h < 630) {
+              const metaGrid = document.getElementById("imageMeta");
+              if (metaGrid) {
+                metaGrid.innerHTML += `<div class="image-meta-item" style="grid-column:1/-1;background:var(--warning-light);"><div class="label" style="color:var(--warning);">Recommendation</div><div class="value" style="font-size:0.8rem;font-weight:500;">Image should be at least 1200x630px for optimal social sharing. Current: ${w}x${h}.</div></div>`;
+              }
+            }
+          };
+          testImg.onerror = function () {
+            const el = document.getElementById("imgStatus");
+            if (el) {
+              el.textContent = "Failed";
+              el.style.color = "var(--error)";
+            }
+          };
+          testImg.src = previewImage;
+        }
+
+        /* ----- Export Card ----- */
+        grid.innerHTML += `
+    <div class="card full-width">
+      <div class="card-header">
+        <span class="card-title"><span class="icon" style="background:var(--bg-tertiary);color:var(--text-secondary);">&#x2B07;</span> Export</span>
+      </div>
+      <div class="card-body">
+        <div class="export-bar">
+          <button class="btn btn-secondary" onclick="copyAsJSON()">&#x1F4CB; Copy as JSON</button>
+          <button class="btn btn-secondary" onclick="downloadJSON()">&#x2B07; Download JSON</button>
+          <button class="btn btn-secondary" onclick="copyAllMeta()">&#x1F4C4; Copy All Metadata</button>
+        </div>
+      </div>
+    </div>`;
+      }
+
+      /* -------------------------------------------------------
+   18. RENDER HELPERS
+   ------------------------------------------------------- */
+      function renderMetaRows(rows) {
+        return rows
+          .map(([key, val, isUrl]) => {
+            const display = val ? (isUrl ? `<a href="${escHtml(val)}" target="_blank" rel="noopener">${escHtml(val)}</a>` : escHtml(val)) : '<span class="missing">Not set</span>';
+            return `<div class="meta-row"><span class="meta-key">${escHtml(key)}</span><span class="meta-value${val ? "" : " missing"}">${display}</span></div>`;
+          })
+          .join("");
+      }
+
+      function escHtml(s) {
+        if (!s) return "";
+        const d = document.createElement("div");
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
+      /* Social preview tab switching */
+      function showPreview(platform) {
+        document.querySelectorAll(".preview-panel").forEach((p) => (p.style.display = "none"));
+        document.querySelectorAll(".preview-tab").forEach((t) => t.classList.remove("active"));
+        const panel = document.querySelector(`.preview-panel[data-preview="${platform}"]`);
+        if (panel) panel.style.display = "block";
+        event.target.classList.add("active");
+      }
+
+      /* -------------------------------------------------------
+   19. EXPORT FUNCTIONS
+   ------------------------------------------------------- */
+      function getExportData() {
+        if (!lastResult) return null;
+        return {
+          url: analyzedUrl,
+          analyzedAt: new Date().toISOString(),
+          openGraph: lastResult.og,
+          twitterCard: lastResult.twitter,
+          seo: lastResult.seo,
+          favicon: lastResult.favicon
+        };
+      }
+
+      function copyAsJSON() {
+        const d = getExportData();
+        if (!d) {
+          toast("No data to copy. Analyze a URL first.", "warn");
+          return;
+        }
+        navigator.clipboard
+          .writeText(JSON.stringify(d, null, 2))
+          .then(() => toast("Copied JSON to clipboard"))
+          .catch(() => toast("Failed to copy", "error"));
+      }
+
+      function downloadJSON() {
+        const d = getExportData();
+        if (!d) {
+          toast("No data to export. Analyze a URL first.", "warn");
+          return;
+        }
+        const blob = new Blob([JSON.stringify(d, null, 2)], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "og-report-" + (getDomain(analyzedUrl) || "report") + ".json";
+        a.click();
+        URL.revokeObjectURL(a.href);
+        toast("JSON downloaded");
+      }
+
+      function copyAllMeta() {
+        if (!lastResult) {
+          toast("No data to copy. Analyze a URL first.", "warn");
+          return;
+        }
+        const lines = [];
+        lines.push("=== Open Graph ===");
+        for (const [k, v] of Object.entries(lastResult.og)) {
+          if (v) lines.push(`og:${k}: ${v}`);
+        }
+        lines.push("\n=== Twitter Card ===");
+        for (const [k, v] of Object.entries(lastResult.twitter)) {
+          if (v) lines.push(`twitter:${k}: ${v}`);
+        }
+        lines.push("\n=== SEO ===");
+        for (const [k, v] of Object.entries(lastResult.seo)) {
+          if (v) lines.push(`${k}: ${v}`);
+        }
+        if (lastResult.favicon) lines.push(`favicon: ${lastResult.favicon}`);
+        navigator.clipboard
+          .writeText(lines.join("\n"))
+          .then(() => toast("Copied all metadata"))
+          .catch(() => toast("Failed to copy", "error"));
+      }
+    </script>
+  </body>
+</html>
