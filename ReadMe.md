@@ -4,7 +4,7 @@ A growing collection of useful developer tools, each built as a **single, self-c
 
 No build step. No dependencies. No frameworks. Just open the file in your browser and it works.
 
----
+![Thumbnail](./thumb.png)
 
 ## Why?
 
@@ -21,8 +21,6 @@ Most developer tools today come with baggage:
 
 Every tool in this collection is a standalone `.html` file containing all the HTML, CSS, and JavaScript it needs. You can download a single file, open it in any browser, and start using it immediately, even offline.
 
----
-
 ## Available Tools
 
 <!--
@@ -30,13 +28,11 @@ Every tool in this collection is a standalone `.html` file containing all the HT
   Keep it alphabetical within each category.
 -->
 
-| #   | Tool          | Category | Description            | Live |
-| --- | ------------- | -------- | ---------------------- | ---- |
-| —   | _Coming soon_ | —        | Contributions welcome! | —    |
+| #   | Tool                                                    | Category  | Description                                                                              | Live                                                                       |
+| --- | ------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| 1   | [Open Graph Inspector](tools/open-graph-inspector.html) | Web & SEO | Analyze meta tags, social previews, and SEO metadata for any URL with actionable scores. | [Try it](https://one-file-tools.pages.dev/tools/open-graph-inspector.html) |
 
 > **Want to see your tool here?** Check out the [Contributing Guide](Contributing.md) and pick an idea from the [Ideas Board](#ideas-board).
-
----
 
 ## Ideas Board
 
@@ -153,8 +149,6 @@ Below is a curated list of tool ideas waiting to be built. Each idea is a potent
 >
 > **Difficulty labels are assigned by the maintainer** ([@praveenscience](https://github.com/praveenscience)) and are slightly negotiable, feel free to discuss in your issue or PR.
 
----
-
 ## Getting Started
 
 ### Use a tool
@@ -191,8 +185,6 @@ git commit
 # Open Contributing.md for the full guide.
 ```
 
----
-
 ## Project Structure
 
 ```
@@ -208,8 +200,6 @@ One-File-Tools/
 └── .gitignore
 ```
 
----
-
 ## Tech Philosophy
 
 | Principle             | Rule                                                                                        |
@@ -220,8 +210,6 @@ One-File-Tools/
 | **Beginner friendly** | Code should be readable and learnable, even if AI is used, make sure to comment humane way. |
 | **Works offline**     | No server calls unless the tool’s purpose requires it.                                      |
 | **Mobile ready**      | Responsive design on every tool.                                                            |
-
----
 
 ## SSoC (Social Summer of Code)
 
@@ -253,8 +241,6 @@ This repository is a proud participant in **[Social Summer of Code (SSoC)](https
 - **Bug Fix** — Fix a broken tool (Mostly `Easy`).
 - **Documentation** — Improve README, CONTRIBUTING, or add inline code comments (only `Easy`).
 
----
-
 ## Deployment
 
 This project is designed for static hosting. Works perfectly on:
@@ -264,8 +250,6 @@ This project is designed for static hosting. Works perfectly on:
 - Netlify
 - Vercel
 - Any static web server
-
----
 
 ## License
 
