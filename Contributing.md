@@ -207,7 +207,17 @@ Valid category IDs: `accessibility`, `browser-network`, `color`, `css`, `utiliti
 
 Take a screenshot of your tool and save it as `tools/your-tool-name.png` (same name as the HTML file, kebab-case).
 
-### Step 7 — Build and verify
+### Step 7 — Sort and normalize `tools.json`
+
+Run the sort-norm script to alphabetically sort tools, normalize tags, and sort tech stacks in `tools.json`:
+
+```bash
+node sort-norm.js tools.json
+```
+
+This ensures consistent ordering and deduplicates tag aliases (e.g., `js` → `javascript`, `html5` → `html`).
+
+### Step 8 — Build and verify
 
 Run the build script to regenerate the landing page, then open `index.html` to verify your tool appears:
 
@@ -216,7 +226,7 @@ node build.js
 open index.html
 ```
 
-### Step 8 — Test
+### Step 9 — Test
 
 - Open the file directly in your browser (`open tools/your-tool-name.html`).
 - Test on Chrome and Firefox at minimum.
@@ -224,7 +234,7 @@ open index.html
 - Check for console errors.
 - Verify it works offline (disconnect and reload).
 
-### Step 9 — Submit
+### Step 10 — Submit
 
 ```bash
 git add tools/your-tool-name.html tools/your-tool-name.png tools.json
