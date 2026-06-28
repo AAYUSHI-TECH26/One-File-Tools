@@ -69,16 +69,16 @@ Below is a curated list of tool ideas waiting to be built. Each idea is a potent
 
 | Idea                                                           | Difficulty |
 | -------------------------------------------------------------- | ---------- |
-| Open Graph Generator — generate OG meta tags and preview cards | Easy       |
-| Open Graph Checker — validate existing OG tags from a URL      | Medium     |
-| Meta Tag Generator — create standard HTML meta tags            | Easy       |
+| ~~Open Graph Generator~~ — ✅ [Built](tools/open-graph-generator.html) | Easy       |
+| ~~Open Graph Checker~~ — ✅ [Built](tools/open-graph-checker.html) | Medium     |
+| ~~Meta Tag Generator~~ — ✅ [Built](tools/meta-tag-generator.html) | Easy       |
 | ~~Twitter / X Card Preview~~ — ✅ [Built](tools/twitter-x-card-preview.html) | Easy       |
-| Robots.txt Generator — build a `robots.txt` file visually      | Easy       |
+| ~~Robots.txt Generator~~ — ✅ [Built](tools/robots-txt-generator.html) | Easy       |
 | Sitemap Generator — create XML sitemaps                        | Medium     |
 | Canonical URL Checker — verify canonical tag setup             | Medium     |
 | JSON-LD / Schema.org Generator — build structured data         | Medium     |
 | Hreflang Tag Generator — generate multi-language link tags     | Easy       |
-| Responsive Breakpoint Tester — preview pages at common device widths | Medium |
+| ~~Responsive Breakpoint Tester~~ — ✅ [Built](tools/responsive-breakpoint-tester.html) | Medium |
 | Privacy Policy Generator — fill a form, get a basic privacy policy   | Easy   |
 
 ### Image Tools
@@ -102,7 +102,7 @@ Below is a curated list of tool ideas waiting to be built. Each idea is a potent
 | Contrast Checker — verify WCAG contrast ratios             | Easy       |
 | ~~Palette Generator~~ — ✅ [Built](tools/palette-generator.html) | Medium     |
 | Gradient Builder — create CSS gradients visually           | Easy       |
-| CSS Color Converter — convert between HEX, RGB, HSL, OKLCH | Easy      |
+| ~~CSS Color Converter~~ — ✅ [Built](tools/css-color-converter.html) | Easy      |
 | Tailwind Color Finder — find the closest Tailwind color    | Easy       |
 
 ### CSS Tools
@@ -113,11 +113,11 @@ Below is a curated list of tool ideas waiting to be built. Each idea is a potent
 | ~~Border Radius Generator~~ — ✅ [Built](tools/border-radius-generator.html) | Easy |
 | ~~Clip Path Generator~~ — ✅ [Built](tools/clip-path-generator.html) | Medium |
 | ~~Glassmorphism Generator~~ — ✅ [Built](tools/glassmorphism-generator.html) | Easy |
-| Neumorphism Generator — create soft UI / neumorphic styles  | Easy       |
+| ~~Neumorphism Generator~~ — ✅ [Built](tools/neumorphism-generator.html) | Easy       |
 | ~~CSS Grid Generator~~ — ✅ [Built](tools/css-grid-generator.html) | Medium     |
-| Flexbox Playground — experiment with Flexbox properties     | Medium     |
-| CSS Unit Converter — convert between px, rem, em, vw, vh    | Easy       |
-| Animation Cubic-Bezier Editor — design easing curves        | Medium     |
+| ~~Flexbox Playground~~ — ✅ [Built](tools/flexbox-playground.html) | Medium     |
+| ~~CSS Unit Converter~~ — ✅ [Built](tools/css-unit-converter.html) | Easy       |
+| ~~Animation Cubic-Bezier Editor~~ — ✅ [Built](tools/animation-cubic-bezier-editor.html) | Medium     |
 | CSS Easing Visualizer — draw cubic-bezier curves with animated preview | Medium |
 | Tailwind → Vanilla CSS Converter — paste Tailwind classes, get equivalent CSS | Medium |
 
@@ -139,6 +139,7 @@ Below is a curated list of tool ideas waiting to be built. Each idea is a potent
 
 | Idea                                                     | Difficulty |
 | -------------------------------------------------------- | ---------- |
+| ~~JSON Formatter~~ — ✅ [Built](tools/json-formatter.html) | Easy       |
 | ~~JSON Diff Viewer~~ — ✅ [Built](tools/json-diff-viewer.html) | Medium |
 | ~~JWT Decoder~~ — ✅ [Built](tools/jwt-decoder.html)     | Easy       |
 | URL Encoder / Decoder — encode and decode URL strings    | Easy       |
@@ -157,6 +158,8 @@ Below is a curated list of tool ideas waiting to be built. Each idea is a potent
 | ~~Cron Expression Builder~~ — ✅ [Built](tools/cron-expression-builder.html) | Medium |
 | Hash Generator — generate MD5, SHA-1, SHA-256 hashes         | Easy       |
 | ~~Password Generator~~ — ✅ [Built](tools/password-generator.html)        | Easy       |
+| ~~UUID Generator~~ — ✅ [Built](tools/uuid-generator.html)    | Easy       |
+| ~~Command Step Loader~~ — ✅ [Built](tools/command-step-loader.html) | Easy |
 | QR Code Generator — create QR codes from text or URLs        | Easy       |
 | Git Ignore Generator — generate .gitignore files for selected technologies | Easy |
 | Commit Message Generator — create conventional commit messages | Easy     |
@@ -241,11 +244,12 @@ One-File-Tools/
 │   └── index.html        # Portfolio theme showcase
 ├── profile.json          # Master data file for resume & portfolio generation
 ├── tools.json            # Tool registry
+├── index-template.txt    # Landing page template (used by build.js)
 ├── build.js              # Generates index.html + resume/portfolio themes
 ├── sort-norm.js          # Sorts and normalizes tools.json
 ├── sync-readme.js        # Auto-syncs the Available Tools table in ReadMe.md
 ├── Contributing.md       # Contribution guide
-├── index.html            # Generated: hub page with Tools/Portfolio/Resume nav
+├── index.html            # Generated: landing page with Tools/Resume/Portfolio pillars
 ├── ReadMe.md             # This file
 ├── LICENSE               # Unlicense (Public Domain)
 └── .gitignore
