@@ -74,7 +74,8 @@ Every tool in this collection is a standalone `.html` file containing all the HT
 | 45 | [Sitemap Generator](tools/sitemap-generator.html) | undefined | A standalone Sitemap Generator that helps users create valid XML sitemaps for websites entirely offline. | [Try it](https://one-file-tools.pages.dev/tools/sitemap-generator) |
 | 46 | [Text Diff Viewer](tools/text-diff-viewer.html) | Text & Content | Compare two blocks of text and see line-level and word-level differences, side-by-side or unified. | [Try it](https://one-file-tools.pages.dev/tools/text-diff-viewer) |
 | 47 | [Twitter / X Card Preview](tools/twitter-x-card-preview.html) | Web & SEO | Preview how Twitter/X cards appear with live updates for Summary and Summary Large Image layouts. | [Try it](https://one-file-tools.pages.dev/tools/twitter-x-card-preview) |
-| 48 | [UUID Generator](tools/uuid-generator.html) | Developer Utilities | Generate random v4 UUIDs instantly, offline. | [Try it](https://one-file-tools.pages.dev/tools/uuid-generator) |
+| 48 | [URL Encoder / Decoder](tools/url-encoder-decoder.html) | JSON & API | Encode and decode URLs or percent-encoded strings instantly using native browser APIs. | [Try it](https://one-file-tools.pages.dev/tools/url-encoder-decoder) |
+| 49 | [UUID Generator](tools/uuid-generator.html) | Developer Utilities | Generate random v4 UUIDs instantly, offline. | [Try it](https://one-file-tools.pages.dev/tools/uuid-generator) |
 
 > **Want to see your tool here?** Check out the [Contributing Guide](Contributing.md) and pick an idea from the [Ideas Board](#ideas-board).
 
