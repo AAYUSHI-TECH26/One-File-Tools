@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --bg:#0a0e1a;
+    --surface:#111827;
+    --surface2:#161d2e;
+    --border:#1f2d45;
+    --text:#e8edf5;
+    --cyan:#00d4c8;
+    --violet:#7c5cfc;
+
+    --radius:8px;
+
+    --mono:"JetBrains Mono", monospace;
+    --sans:"Inter", sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    padding:30px;
+}
+
+.app{
+    max-width:1200px;
+    margin:auto;
+}
+h1{
+    font-family:var(--mono);
+    color:var(--cyan);
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+h1 span{
+    color:var(--violet);
+}
+.layout{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:30px;
+}
+
+.left-panel,
+.right-panel{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px;
+}
+
+h2{
+    font-size:18px;
+    margin-bottom:15px;
+    color:var(--cyan);
+}
+
+textarea{
+    width:100%;
+    height:250px;
+    background:var(--surface2);
+    border:1px solid var(--border);
+    color:white;
+    padding:15px;
+    resize:none;
+    border-radius:6px;
+    font-family:var(--mono);
+}
+
+button{
+    margin-top:15px;
+    background:var(--cyan);
+    color:black;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.preview-box{
+    background:var(--surface2);
+    border-radius:6px;
+    padding:20px;
+    min-height:250px;
+}
+
+.demo-btn{
+    margin-bottom:20px;
+}
+
+.demo-card{
+    background:white;
+    color:black;
+    padding:20px;
+    border-radius:8px;
+}
+input[type="text"]{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    background:var(--surface2);
+    border:1px solid var(--border);
+    color:white;
+    border-radius:6px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid var(--border);
+    padding:12px;
+    text-align:left;
+}
+
+th{
+    background:var(--surface2);
+    color:var(--cyan);
+}
+.valueInput{
+    width:100%;
+    padding:8px;
+    background:var(--surface2);
+    color:white;
+    border:1px solid var(--border);
+    border-radius:4px;
+    font-family:var(--mono);
+}
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variable Explorer & Theme Generator</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+   <div class="app">
+
+    <h1>CSS <span>Variable Explorer</span></h1>
+
+    <div class="layout">
+
+        <div class="left-panel">
+            <h2>Paste CSS</h2>
+
+            <textarea id="cssInput" placeholder="Paste your CSS here..."></textarea>
+
+            <button id="extractBtn">Extract Variables</button>
+        </div>
+
+        <div class="right-panel">
+            <h2>Live Preview</h2>
+
+            <div class="preview-box" id="previewBox">
+                <button class="demo-btn">Sample Button</button>
+
+                <div class="demo-card">
+                    <h3>Sample Card</h3>
+                    <p>Your theme preview will appear here.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="left-panel" style="margin-top:20px;">
+
+        <h2>Variables</h2>
+
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="Search variable..."
+        >
+
+        <table id="variableTable">
+            <thead>
+                <tr>
+                    <th>Variable</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+
+            <tbody></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<script>
+  const cssInput = document.getElementById("cssInput");
+  const extractBtn = document.getElementById("extractBtn");
+  const tableBody = document.querySelector("#variableTable tbody");
+
+  extractBtn.addEventListener("click", () => {
+
+    alert("Button Clicked");
+    console.log(cssInput.value);
+
+    const css = cssInput.value;
+
+    console.log(css);
+
+    const regex = /--([\w-]+)\s*:\s*([^;]+);/g;
+
+    tableBody.innerHTML = "";
+
+    let match;
+
+    while ((match = regex.exec(css)) !== null) {
+
+        console.log(match);
+
+        const variable="--"+match[1];
+        const value=match[2];
+
+        tableBody.innerHTML+=`
+        <tr>
+            <td>${variable}</td>
+            <td><input class="valueInput" value="${value}"></td>
+        </tr>
+        `;
+    }
+
+});
+</script>
+</body>
+</html>
