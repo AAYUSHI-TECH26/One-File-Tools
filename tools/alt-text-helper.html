@@ -383,9 +383,7 @@ Built for One File Tools.
           <button class="btn-ghost" id="btnCopy" type="button">Copy alt text</button>
           <button class="btn-ghost" id="btnClear" type="button">Clear</button>
         </div>
-        <div class="note">
-          This tool runs fully offline and can't "see" the image contents — you write the description, and it checks the wording for common accessibility issues. Use the scaffold as a starting prompt, then replace the placeholders with what you actually see.
-        </div>
+        <div class="note">This tool runs fully offline and can't "see" the image contents — you write the description, and it checks the wording for common accessibility issues. Use the scaffold as a starting prompt, then replace the placeholders with what you actually see.</div>
       </main>
 
       <main class="studio">
@@ -507,7 +505,7 @@ Built for One File Tools.
         if (trimmed === "") {
           items.push({
             level: "warn",
-            message: "Alt text is empty. That's correct only for <strong>purely decorative</strong> images (use <code>alt=\"\"</code>). For meaningful images, describe them."
+            message: 'Alt text is empty. That\'s correct only for <strong>purely decorative</strong> images (use <code>alt=""</code>). For meaningful images, describe them.'
           });
           return items;
         }
@@ -530,15 +528,15 @@ Built for One File Tools.
         // Redundant prefix.
         const badPrefix = REDUNDANT_PREFIXES.find((p) => lower.startsWith(p));
         if (badPrefix) {
-          items.push({ level: "fail", message: 'Starts with "<strong>' + badPrefix + '</strong>". Screen readers already announce it\'s an image — drop that opener.' });
+          items.push({ level: "fail", message: 'Starts with "<strong>' + badPrefix + "</strong>\". Screen readers already announce it's an image — drop that opener." });
         } else {
-          items.push({ level: "pass", message: "No redundant \"image of / picture of\" opener." });
+          items.push({ level: "pass", message: 'No redundant "image of / picture of" opener.' });
         }
 
         // Vague-only content.
         const meaningfulWords = words.filter((w) => !VAGUE_WORDS.includes(w.toLowerCase().replace(/[^a-z]/gi, "")));
         if (meaningfulWords.length === 0) {
-          items.push({ level: "fail", message: "Only vague words detected. Describe the actual subject and its purpose, not just \"image\" or \"logo\"." });
+          items.push({ level: "fail", message: 'Only vague words detected. Describe the actual subject and its purpose, not just "image" or "logo".' });
         } else if (meaningfulWords.length < words.length / 2) {
           items.push({ level: "warn", message: "Fairly vague — a lot of the words are generic. Add concrete, specific detail." });
         }
