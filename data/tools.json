@@ -74,6 +74,56 @@
   ],
   "tools": [
     {
+      "id": "env-parser-validator",
+      "name": ".env Parser & Validator",
+      "shortDescription": "Parse, validate, mask, search, and export .env files entirely in the browser.",
+      "longDescription": "## .env Parser & Validator\n\nA privacy-first developer utility for inspecting .env configuration files locally without uploads, servers, or dependencies.\n\n### Features\n\n- Paste, upload, or drag and drop .env files\n- Parses comments, blank lines, quoted values, escaped characters, empty values, and spaces around equals signs\n- Detects duplicate keys, malformed lines, invalid names, whitespace issues, empty values, invalid quotes, unused comments, and suspicious values\n- Masks sensitive variables such as API keys, secrets, passwords, tokens, private keys, and database URLs by default\n- Live search, filtering, sorting, pagination, and validation statistics\n- Exports pretty or minified JSON and cleaned .env files with duplicate and comment options\n- Keyboard shortcuts for opening, clearing, searching, and downloading\n- Works completely offline in a single browser-only HTML file",
+      "category": "utilities",
+      "tags": [
+        "configuration",
+        "developer-tools",
+        "dotenv",
+        "env",
+        "offline",
+        "parser",
+        "security",
+        "validator"
+      ],
+      "techStack": [
+        "Clipboard API",
+        "CSS3",
+        "FileReader API",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "alt-text-helper",
+      "name": "Alt Text Helper",
+      "shortDescription": "Draft image alt text and get instant feedback on whether it's clear, concise, and accessible.",
+      "longDescription": "## Alt Text Helper\n\nPreview an image locally, draft its alt text, and get instant guidance on whether the description is too vague, too long, repetitive, or missing detail — with a scaffold to help you start. Runs fully offline.\n\n### Features\n\n- Upload or drag-and-drop an image to preview it locally (never uploaded)\n- Insert a guided fill-in scaffold to start a description\n- Flags common issues: too vague, too long, repetitive, redundant \"image of\" openers, unfilled placeholders, and filenames\n- Live character counter with screen-reader-friendly length guidance\n- Tips for writing accessible, context-aware alt text\n- Copy the final alt text to the clipboard\n- Clear and start over with one click\n- Fully responsive, keyboard accessible, and works offline",
+      "category": "accessibility",
+      "tags": [
+        "a11y",
+        "accessibility",
+        "alt-text",
+        "content",
+        "image",
+        "utility",
+        "web"
+      ],
+      "techStack": [
+        "CSS3",
+        "Google Fonts",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Easy",
+      "status": "live"
+    },
+    {
       "id": "animation-cubic-bezier-editor",
       "name": "Animation Cubic-Bezier Editor",
       "shortDescription": "Visually create and customize CSS cubic-bezier() easing functions with a live animation preview.",
@@ -239,6 +289,29 @@
       "status": "live"
     },
     {
+      "id": "timezone-converter",
+      "name": "Chrono / Timezone Converter",
+      "shortDescription": "Visually synchronize and convert time across multiple global timezones.",
+      "longDescription": "## Chrono / Timezone Converter\n\nA visual timezone converter and timeline slider designed to help developers and remote teams coordinate meetings and server deployment windows across the globe.\n\n### Features\n- Select and add multiple timezones to your dashboard\n- Interactive timeline scrubber to see synced local times\n- Highlight working hours (9 AM - 5 PM) to easily spot overlapping availability\n- Reset to current 'Now' time with a single click\n- 100% offline using native Intl API",
+      "category": "utilities",
+      "tags": [
+        "converter",
+        "time",
+        "timeline",
+        "timezone",
+        "utility",
+        "world-clock"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Intl API",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
       "id": "clip-path-generator",
       "name": "Clip Path Generator",
       "shortDescription": "Visually create complex CSS clip-path shapes and instantly copy the generated code.",
@@ -304,6 +377,28 @@
         "Canvas API",
         "CSS3",
         "Google Fonts",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "color-palette-generator",
+      "name": "Color Palette Generator",
+      "shortDescription": "Generate beautiful random color combinations for designers and frontend developers.",
+      "longDescription": "## Color Palette Generator\n\nA modern tool that creates beautiful color combinations for designers and frontend developers. Press spacebar to rapidly generate new palettes.\n\n### Features\n\n- Generate 5-color palettes instantly\n- Lock individual colors (🔒/🔓) while regenerating the rest\n- Click to instantly copy HEX codes to your clipboard\n- Export as CSS root variables\n- Export as a JSON array file\n- Fully responsive layout for mobile testing",
+      "category": "color",
+      "tags": [
+        "color",
+        "css",
+        "design",
+        "hex",
+        "palette",
+        "ui"
+      ],
+      "techStack": [
+        "CSS3",
         "HTML5",
         "Vanilla JS"
       ],
@@ -385,6 +480,31 @@
       "status": "live"
     },
     {
+      "id": "css-easing-visualizer",
+      "name": "CSS Easing Visualizer",
+      "shortDescription": "Compare multiple CSS easing curves side-by-side on a shared graph and in an animated race preview.",
+      "longDescription": "## CSS Easing Visualizer\n\nCompare multiple CSS easing curves side-by-side — see their shape on a shared graph and watch them race in an animated preview, so you can pick the right motion feel by comparison rather than editing one curve in isolation.\n\n### Features\n\n- Add and remove multiple curves (named presets or custom cubic-bezier values)\n- Shared, color-coded SVG graph plotting each curve's progress over time\n- Animated race track with one ball per curve, driven by the Web Animations API\n- Adjustable shared duration for a fair comparison\n- Legend showing each curve's resolved CSS easing value\n- Runs completely offline",
+      "category": "css",
+      "tags": [
+        "animation",
+        "comparison",
+        "css",
+        "cubic-bezier",
+        "easing",
+        "frontend"
+      ],
+      "techStack": [
+        "CSS3",
+        "Google Fonts",
+        "HTML5",
+        "SVG",
+        "Vanilla JS",
+        "Web Animations API"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
       "id": "css-grid-generator",
       "name": "CSS Grid Generator",
       "shortDescription": "Build CSS Grid layouts visually with configurable columns, rows, gap, and sizing options.",
@@ -402,6 +522,27 @@
       "techStack": [
         "CSS3",
         "Google Fonts",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "css-specificity-calculator",
+      "name": "CSS Specificity Calculator",
+      "shortDescription": "Break down CSS selectors into their specificity score and see which rule wins a conflict.",
+      "longDescription": "## CSS Specificity Calculator\n\nPaste CSS selectors or a full stylesheet and see each selector's specificity broken down into ID, class, and element counts, ranked by which rule would win.\n\n### Features\n\n- Parses individual selectors or a full pasted stylesheet\n- Breaks down specificity into ID, class/attribute/pseudo-class, and element/pseudo-element counts\n- Correctly handles :is(), :not(), :has(), and :where() per the CSS specification\n- Ranks selectors to show which one wins a conflict\n- Flags !important usage separately\n- Syntax-highlighted selector display\n- Copy results as plain text\n- Light and dark mode support\n- Works completely offline",
+      "category": "css",
+      "tags": [
+        "css",
+        "debugging",
+        "frontend",
+        "selector",
+        "specificity"
+      ],
+      "techStack": [
+        "CSS3",
         "HTML5",
         "Vanilla JS"
       ],
@@ -441,6 +582,27 @@
         "css",
         "custom-properties",
         "preview",
+        "theme",
+        "variables"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "css-variable-explorer-glass",
+      "name": "CSS Variable Explorer & Theme Generator",
+      "shortDescription": "Explore, edit, and export CSS custom properties with live preview and a glassmorphism UI.",
+      "longDescription": "## CSS Variable Explorer & Theme Generator\n\nA glassmorphism-styled tool for exploring and editing CSS custom properties.\n\n### Features\n\n- Browse and edit CSS variables in real time\n- Live preview of changes\n- Export generated theme\n- Glassmorphism UI design",
+      "category": "css",
+      "tags": [
+        "css",
+        "custom-properties",
+        "explorer",
         "theme",
         "variables"
       ],
@@ -519,6 +681,27 @@
       "status": "live"
     },
     {
+      "id": "git-command-explainer",
+      "name": "Git Command Explainer",
+      "shortDescription": "Explain any Git command in plain English, with full flag-by-flag breakdowns for the most commonly used commands.",
+      "longDescription": "## Git Command Explainer\n\nType or paste a Git command and get a clear, accurate explanation. Every Git porcelain command gets a command-level explanation, and the most commonly used commands get a full flag-by-flag breakdown.\n\n### Features\n\n- Command-level explanations covering the full range of Git porcelain commands\n- Deep flag-by-flag breakdown for 26 high-usage commands (add, commit, push, pull, fetch, merge, rebase, reset, checkout, switch, restore, branch, stash, log, diff, cherry-pick, revert, tag, clone, remote, clean, blame, init, show, worktree, config)\n- Correctly parses combined short flags (e.g. -am splits into -a and -m) and flag arguments\n- Flags destructive or irreversible operations with a clear warning (e.g. reset --hard, push --force, clean -fd)\n- Honest fallback for unrecognized commands or flags instead of guessing\n- Clickable example commands to try instantly\n- Light and dark mode support\n- Works completely offline",
+      "category": "utilities",
+      "tags": [
+        "cli",
+        "developer-tools",
+        "explainer",
+        "git",
+        "version-control"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
       "id": "git-ignore-generator",
       "name": "Git Ignore Generator",
       "shortDescription": "Generate boilerplate .gitignore files for various technologies instantly, offline.",
@@ -540,6 +723,30 @@
       "status": "live"
     },
     {
+      "id": "github-profile-readme-generator",
+      "name": "GitHub Profile README Generator",
+      "shortDescription": "Generate a professional GitHub profile README with live stats and an editable preview.",
+      "longDescription": "## GitHub Profile README Generator\n\nThis tool helps developers create a professional and visually appealing README for their GitHub profile. It provides a simple form to input personal details and automatically generates the corresponding Markdown, complete with social links, skill badges, and live-fetched GitHub statistics.\n\n### Features\n\n- Live Markdown editor with a rendered preview tab.\n- Fetches and displays GitHub stats (total stars, forks, contributions) automatically.\n- Generates sections for a bio, tech stack (with badges), and social media links (with icons).\n- Allows for direct editing of the generated Markdown.\n- Provides \"Copy Markdown\" and \"Download README.md\" functionality.\n- Runs entirely in the browser, ensuring user privacy.",
+      "category": "utilities",
+      "tags": [
+        "api",
+        "developer-tools",
+        "generator",
+        "github",
+        "markdown",
+        "profile",
+        "readme"
+      ],
+      "techStack": [
+        "CSS3",
+        "Fetch API",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
       "id": "github-token-validator-glassmorphism",
       "name": "GitHub Token Validator (Glassmorphism)",
       "shortDescription": "Glassmorphism-themed GitHub Token Validator tool that allows users to validate GitHub Personal Access Tokens directly in the browser.",
@@ -554,6 +761,27 @@
       "techStack": [
         "CSS3",
         "Fetch API",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Easy",
+      "status": "live"
+    },
+    {
+      "id": "github-token-validator-modern",
+      "name": "GitHub Token Validator (Modern)",
+      "shortDescription": "Validate GitHub Personal Access Tokens with a sleek, modern interface. Token never leaves your browser.",
+      "longDescription": "## GitHub Token Validator (Modern)\n\nA modern-themed GitHub token validator with clean UI.\n\n### Features\n\n- Validate GitHub Personal Access Tokens\n- Display user identity and scopes\n- Token never leaves the browser\n- Modern, clean design",
+      "category": "utilities",
+      "tags": [
+        "developer-tools",
+        "github",
+        "security",
+        "token",
+        "validation"
+      ],
+      "techStack": [
+        "CSS3",
         "HTML5",
         "Vanilla JS"
       ],
@@ -674,11 +902,34 @@
       "status": "live"
     },
     {
+      "id": "hash-generator",
+      "name": "Hash Generator",
+      "shortDescription": "Generate SHA-1, SHA-256 and SHA-512 hashes instantly in your browser.",
+      "longDescription": "## Hash Generator\n\nGenerate SHA-1, SHA-256 and SHA-512 hashes locally using the browser Web Crypto API.\n\n### Features\n\n- Generate SHA-1, SHA-256 and SHA-512 hashes\n- Live hashing while typing\n- File input support\n- Copy hash to clipboard\n- Uppercase output option\n- Works completely offline",
+      "category": "utilities",
+      "tags": [
+        "crypto",
+        "developer-tools",
+        "hash",
+        "sha1",
+        "sha256",
+        "sha512"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS",
+        "Web Crypto API"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
       "id": "hreflang-tag-generator",
       "name": "Hreflang Tag Generator",
       "shortDescription": "Generate valid hreflang link tags for multilingual and multi-regional websites.",
       "longDescription": "## Hreflang Tag Generator\n\nGenerate copy-ready HTML hreflang tags for multilingual websites. Supports multiple language-region combinations, x-default, validation, and runs entirely offline.\n\n### Features\n\n- Multiple language and region entries\n- ISO language and region validation\n- x-default support\n- Copy-ready HTML output\n- Runs completely offline",
-      "category": "seo",
+      "category": "web-seo",
       "tags": [
         "generator",
         "hreflang",
@@ -692,6 +943,51 @@
         "Vanilla JS"
       ],
       "difficulty": "Easy",
+      "status": "live"
+    },
+    {
+      "id": "http-header-inspector",
+      "name": "HTTP Header Inspector",
+      "shortDescription": "Send a request to any URL and inspect its HTTP response headers, status code, and timing.",
+      "longDescription": "## HTTP Header Inspector\n\nSend a request to any URL and inspect the response — status code, timing, content type, and all exposed response headers. Useful for debugging caching, security headers, and CORS behavior without opening browser dev tools.\n\n### Features\n\n- URL input with GET / HEAD method selector\n- Status code, response time, and content type shown as status pills\n- Full response headers table, alphabetically sorted\n- Clear note explaining CORS-limited header visibility for cross-origin requests\n- Copy headers as plain text\n- Download the result as JSON\n- Runs entirely client-side",
+      "category": "browser-network",
+      "tags": [
+        "cors",
+        "developer-tools",
+        "headers",
+        "http",
+        "inspector",
+        "network"
+      ],
+      "techStack": [
+        "CSS3",
+        "Fetch API",
+        "Google Fonts",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "http-request-header-builder",
+      "name": "HTTP Request Header Builder",
+      "shortDescription": "Create, validate, organize, preview, import, and export HTTP request headers locally in your browser.",
+      "longDescription": "## HTTP Request Header Builder\n\nBuild and manage HTTP request headers with validation and export.\n\n### Features\n\n- Create and organize HTTP request headers\n- Header validation\n- Import and export headers\n- Preview formatted output\n- Works entirely offline",
+      "category": "json-api",
+      "tags": [
+        "api",
+        "headers",
+        "http",
+        "request",
+        "utility"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
       "status": "live"
     },
     {
@@ -836,7 +1132,7 @@
       "name": "Markdown Previewer",
       "shortDescription": "Write and preview Markdown in real time, offline.",
       "longDescription": "## Markdown Previewer\n\nA standalone Markdown editor with live preview that works completely offline.\n\n### Features\n\n- Live Markdown preview\n- Support for headings, lists, tables, links, images, blockquotes, task lists, and code blocks\n- Copy generated HTML\n- Export rendered HTML\n- Focus mode\n- Word and character count\n- Responsive design\n- Works completely offline",
-      "category": "text-content",
+      "category": "text",
       "tags": [
         "editor",
         "html",
@@ -1019,6 +1315,30 @@
       "status": "live"
     },
     {
+      "id": "privacy-policy-generator",
+      "name": "Privacy Policy Generator",
+      "shortDescription": "Generate customizable privacy policies for websites and apps with live preview, copy, and download.",
+      "longDescription": "## Privacy Policy Generator\n\nGenerate customizable privacy policies for websites and apps using a simple form with live preview.\n\n### Features\n\n- Fill-in form with common policy clauses\n- GDPR and CCPA compliance options\n- Live preview of generated policy\n- Copy to clipboard and download\n- Works completely offline",
+      "category": "web-seo",
+      "tags": [
+        "ccpa",
+        "gdpr",
+        "generator",
+        "legal",
+        "policy",
+        "privacy",
+        "seo",
+        "website"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Easy",
+      "status": "live"
+    },
+    {
       "id": "qr-code-generator",
       "name": "QR Code Generator",
       "shortDescription": "Instantly generate customizable, high-quality QR codes offline.",
@@ -1062,6 +1382,48 @@
         "Vanilla JS"
       ],
       "difficulty": "Easy",
+      "status": "live"
+    },
+    {
+      "id": "regex-playground",
+      "name": "Regex Playground",
+      "shortDescription": "Test regular expressions against custom text with live highlighting and replacement.",
+      "longDescription": "## Regex Playground\n\nCreate an interactive Regular Expression Playground where users can test regular expressions against custom input text with live highlighting. The tool supports different regex flags and provides instant feedback.",
+      "category": "utilities",
+      "tags": [
+        "developer-tools",
+        "javascript",
+        "regex",
+        "testing",
+        "validation"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "regex-tester",
+      "name": "Regexa — Pattern Workbench",
+      "shortDescription": "A polished regex testing workbench with live matching, flag toggles, and match group inspection.",
+      "longDescription": "## Regexa — Pattern Workbench\n\nAn advanced regex testing tool with a developer-focused UI.\n\n### Features\n\n- Live regex matching with highlighting\n- Flag toggles (g, i, m, s, u)\n- Match group inspection\n- JetBrains Mono typography\n- Dark-themed workbench UI",
+      "category": "utilities",
+      "tags": [
+        "developer-tools",
+        "javascript",
+        "patterns",
+        "regex",
+        "testing"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
       "status": "live"
     },
     {
@@ -1116,6 +1478,7 @@
       "name": "Sitemap Generator",
       "shortDescription": "A standalone Sitemap Generator that helps users create valid XML sitemaps for websites entirely offline.",
       "longDescription": "## Sitemap Generator\n\nA standalone Sitemap Generator that helps users create valid XML sitemaps for websites.\n\n### Features\n\n- Add multiple website URLs individually.\n- **New:** Bulk Import a list of URLs instantly via copy-paste.\n- Set last modified (lastmod) date.\n- Configure change frequency (changefreq) and priority values.\n- Generate valid XML sitemap with real-time XML preview.\n- One-click copy generated XML or download as sitemap.xml.\n- Works completely offline with no dependencies.",
+      "category": "web-seo",
       "tags": [
         "generator",
         "offline",
@@ -1126,6 +1489,71 @@
       ],
       "techStack": [
         "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "sql-to-mongodb-translator",
+      "name": "SQL to MongoDB Translator",
+      "shortDescription": "Translate standard SQL queries instantly into MongoDB Aggregation Pipeline JSON arrays.",
+      "longDescription": "## SQL to MongoDB Translator\n\nDevelopers migrating from relational databases to MongoDB often struggle to write complex NoSQL queries. This tool allows users to write standard SQL queries (including SELECT, WHERE, GROUP BY, ORDER BY, and LIMIT) and instantly translates them into the equivalent MongoDB Aggregation Pipeline JSON array.\n\n### Features\n\n- Write SQL in a clean editor with basic auto-formatting\n- Translates `SELECT/FROM` into `$project` stages\n- Translates `WHERE` conditions into `$match` stages\n- Translates `GROUP BY` into `$group` with basic aggregations (COUNT, SUM, AVG)\n- Translates `ORDER BY` into `$sort`\n- Translates `LIMIT` into `$limit`\n- Client-side parser ensuring privacy (no backend required)\n- Instantly copy the resulting JSON pipeline",
+      "category": "utilities",
+      "tags": [
+        "converter",
+        "database",
+        "mongodb",
+        "nosql",
+        "sql"
+      ],
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "svg-optimizer",
+      "name": "SVG Optimizer",
+      "shortDescription": "Compress and optimize raw SVG code by removing unnecessary metadata, empty tags, and comments.",
+      "longDescription": "## SVG Optimizer\n\nA single-file tool to compress and optimize raw SVG code by removing unnecessary metadata, empty tags, and comments.\n\n### Features\n\n- Paste raw SVG code for instant optimization\n- Removes `<title>`, `<desc>`, `<!-- comments -->`, and empty tags\n- Live visual preview container to ensure SVG integrity\n- Instantly copy or download optimized minified SVG\n- Works completely offline locally in your browser",
+      "category": "image",
+      "tags": [
+        "compressor",
+        "image-tools",
+        "minify",
+        "optimizer",
+        "svg"
+      ],
+      "techStack": [
+        "CSS3",
+        "DOMParser",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
+    },
+    {
+      "id": "tailwind-vanilla-css-converter",
+      "name": "Tailwind → Vanilla CSS Converter",
+      "shortDescription": "Paste Tailwind utility classes and get the equivalent hand-written CSS rule.",
+      "longDescription": "## Tailwind → Vanilla CSS Converter\n\nPaste a string of Tailwind utility classes and get the equivalent hand-written CSS rule. Useful for learning what a Tailwind class compiles to, or migrating a small component away from Tailwind without pulling in the framework.\n\n### Features\n\n- Editable CSS selector plus a Tailwind class input\n- Covers spacing, flex/grid layout, sizing, typography, a color palette subset, borders, radius, and shadow utilities\n- Handles responsive/state prefixes (`md:`, `hover:`) by converting the base utility with a note\n- Lists any unrecognized classes instead of failing silently\n- One-click copy of the generated CSS\n- Runs completely offline",
+      "category": "css",
+      "tags": [
+        "converter",
+        "css",
+        "frontend",
+        "tailwind",
+        "utility-classes"
+      ],
+      "techStack": [
+        "CSS3",
+        "Google Fonts",
         "HTML5",
         "Vanilla JS"
       ],
@@ -1197,6 +1625,29 @@
       ],
       "techStack": [
         "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Easy",
+      "status": "live"
+    },
+    {
+      "id": "user-agent-parser",
+      "name": "User Agent Parser",
+      "shortDescription": "Parse any User-Agent string into a readable breakdown of browser, engine, OS, device, and CPU architecture.",
+      "longDescription": "## User Agent Parser\n\nParse any User-Agent string — or your current browser — into a plain, readable breakdown. Identifies the browser and version, rendering engine, operating system and version, device type, and CPU architecture when available. All parsing happens entirely offline.\n\n### Features\n\n- Paste and parse any User-Agent string instantly\n- Detects browser name and version\n- Detects operating system and version (when available)\n- Detects rendering engine (Blink, Gecko, WebKit, Trident, etc.)\n- Detects device type (Desktop, Mobile, Tablet, Bot, Smart TV)\n- Displays CPU architecture when advertised\n- One-click \"Use current browser\" button to parse `navigator.userAgent`\n- Copy parsed info as formatted text or JSON\n- Clear/reset with a single click\n- Fully responsive, keyboard accessible, and works completely offline",
+      "category": "browser-network",
+      "tags": [
+        "browser",
+        "debugging",
+        "network",
+        "parser",
+        "user-agent",
+        "utility"
+      ],
+      "techStack": [
+        "CSS3",
+        "Google Fonts",
         "HTML5",
         "Vanilla JS"
       ],
