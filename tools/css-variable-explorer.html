@@ -45,11 +45,17 @@ h1 span{
 }
 .layout{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:320px 320px 1fr;
     gap:20px;
-    margin-top:30px;
+    align-items:start;
+}
+@media (max-width:900px){
+
+.layout{
+    grid-template-columns:1fr;
 }
 
+}
 .left-panel,
 .right-panel{
     background:var(--surface);
@@ -96,14 +102,24 @@ button{
 
 .demo-btn{
     margin-bottom:20px;
+    background:#3498db;
+    color:white;
+    padding:12px 20px;
+    border:none;
+    border-radius:6px;
+    margin-bottom:20px;
 }
+
+
 
 .demo-card{
     background:white;
     color:black;
     padding:20px;
     border-radius:8px;
+    border-left:6px solid #3498db;
 }
+
 input[type="text"]{
     width:100%;
     padding:12px;
@@ -138,6 +154,45 @@ th{
     border-radius:4px;
     font-family:var(--mono);
 }
+.colorPicker{
+    width:40px;
+    height:40px;
+    border:none;
+    background:none;
+    cursor:pointer;
+    padding:0;
+    margin-right:10px;
+}
+.button-group{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.button-group button{
+    margin-top:0;
+}
+#variableTable{
+    width:100%;
+}
+
+#variableTable tbody{
+    display:block;
+    max-height:350px;
+    overflow-y:auto;
+}
+
+#variableTable thead,
+#variableTable tbody tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+.left-panel button{
+    margin-right:10px;
+}
+
 </style>
 
 <head>
@@ -156,30 +211,23 @@ th{
 
     <div class="layout">
 
-        <div class="left-panel">
-            <h2>Paste CSS</h2>
+    <!-- Paste CSS -->
+    <div class="left-panel">
 
-            <textarea id="cssInput" placeholder="Paste your CSS here..."></textarea>
+        <h2>Paste CSS</h2>
 
+        <textarea id="cssInput" placeholder="Paste your CSS here..."></textarea>
+
+        <div class="button-group">
             <button id="extractBtn">Extract Variables</button>
-        </div>
-
-        <div class="right-panel">
-            <h2>Live Preview</h2>
-
-            <div class="preview-box" id="previewBox">
-                <button class="demo-btn">Sample Button</button>
-
-                <div class="demo-card">
-                    <h3>Sample Card</h3>
-                    <p>Your theme preview will appear here.</p>
-                </div>
-            </div>
+            <button id="copyBtn">Copy CSS</button>
+            <button id="downloadBtn">Download CSS</button>
         </div>
 
     </div>
 
-    <div class="left-panel" style="margin-top:20px;">
+    <!-- Variables -->
+    <div class="left-panel">
 
         <h2>Variables</h2>
 
@@ -190,6 +238,7 @@ th{
         >
 
         <table id="variableTable">
+
             <thead>
                 <tr>
                     <th>Variable</th>
@@ -203,41 +252,234 @@ th{
 
     </div>
 
+    <!-- Live Preview -->
+    <div class="right-panel">
+
+        <h2>Live Preview</h2>
+
+        <div class="preview-box" id="previewBox">
+
+            <button class="demo-btn" id="demoBtn">
+                Sample Button
+            </button>
+
+            <div class="demo-card" id="demoCard">
+
+                <h3 id="cardTitle">Sample Card</h3>
+
+                <p id="cardText">
+                    Your theme preview will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+    
+
 </div>
 <script>
+  const downloadBtn = document.getElementById("downloadBtn");
+  const copyBtn = document.getElementById("copyBtn");
+  const previewBox = document.getElementById("previewBox");
+  const cardTitle = document.getElementById("cardTitle");
+  const cardText = document.getElementById("cardText");
+  const demoBtn = document.getElementById("demoBtn");
+  const demoCard = document.getElementById("demoCard");
+  const searchBox = document.getElementById("searchBox");
   const cssInput = document.getElementById("cssInput");
   const extractBtn = document.getElementById("extractBtn");
   const tableBody = document.querySelector("#variableTable tbody");
 
+    // Check if value is a color
+  function isColor(value) {
+      value = value.trim().toLowerCase();
+      return (
+        value.startsWith("#") ||
+        value.startsWith("rgb") ||
+        value.startsWith("hsl")
+      );
+  }
+// Extract Variables
   extractBtn.addEventListener("click", () => {
 
-    alert("Button Clicked");
-    console.log(cssInput.value);
-
     const css = cssInput.value;
-
-    console.log(css);
 
     const regex = /--([\w-]+)\s*:\s*([^;]+);/g;
 
     tableBody.innerHTML = "";
 
     let match;
-
     while ((match = regex.exec(css)) !== null) {
+        const variable = "--" + match[1];
+        const value = match[2].trim();
 
-        console.log(match);
+        const color = isColor(value);
 
-        const variable="--"+match[1];
-        const value=match[2];
-
-        tableBody.innerHTML+=`
+        tableBody.innerHTML += `
         <tr>
-            <td>${variable}</td>
-            <td><input class="valueInput" value="${value}"></td>
+           <td>${variable}</td>
+           <td>
+               ${color ? `
+               <input
+                  type="color"
+                  value="${value}"
+                  class="colorPicker">
+                ` : ""}
+                <input
+                  type="text"
+                  class="valueInput"
+                  value="${value}">
+
+            </td>
         </tr>
         `;
     }
+
+});
+
+// Search Variables
+searchBox.addEventListener("input", () => {
+
+    const rows = tableBody.querySelectorAll("tr");
+
+    rows.forEach(row => {
+
+        const variable = row.cells[0].textContent.toLowerCase();
+        const search = searchBox.value.toLowerCase();
+
+        row.style.display = variable.includes(search) ? "" : "none";
+
+    });
+
+});
+
+// Sync Color Picker -> Text Input
+tableBody.addEventListener("input", (e) => {
+
+    if (e.target.type === "color") {
+
+        const textInput = e.target.parentElement.querySelector(".valueInput");
+
+        textInput.value = e.target.value;
+
+    }
+
+});
+tableBody.addEventListener("input", (e) => {
+
+    const row = e.target.closest("tr");
+    if (!row) return;
+
+    const variable = row.cells[0].textContent.trim();
+
+    const textInput = row.querySelector(".valueInput");
+    const colorPicker = row.querySelector(".colorPicker");
+
+    const value = textInput.value;
+
+    // Text change hua
+    if (e.target.classList.contains("valueInput")) {
+
+        if (colorPicker && isColor(value)) {
+            colorPicker.value = value;
+        }
+
+    }
+
+    // Color picker change hua
+    if (e.target.classList.contains("colorPicker")) {
+
+        textInput.value = colorPicker.value;
+
+    }
+
+    // Latest value lo
+    
+
+    switch(variable){
+
+      case "--primary":
+        demoBtn.style.backgroundColor = value;
+        demoCard.style.borderLeftColor = value;
+        break;
+
+      case "--secondary":
+        demoCard.style.backgroundColor = value;
+        break;
+
+      case "--text":
+        demoCard.style.color = value;
+        cardTitle.style.color = value;
+        cardText.style.color = value;
+        break;
+
+      case "--radius":
+        demoBtn.style.borderRadius = value;
+        demoCard.style.borderRadius = value;
+        break;
+    }
+
+});
+copyBtn.addEventListener("click", () => {
+
+    let css = ":root {\n";
+
+    const rows = tableBody.querySelectorAll("tr");
+
+    rows.forEach(row => {
+
+        const variable = row.cells[0].textContent.trim();
+        const value = row.querySelector(".valueInput").value;
+
+        css += `    ${variable}: ${value};\n`;
+
+    });
+
+    css += "}";
+
+    navigator.clipboard.writeText(css)
+        .then(() => {
+            alert("CSS Copied!");
+        })
+        .catch(() => {
+            alert("Copy failed!");
+        });
+
+});
+downloadBtn.addEventListener("click", () => {
+
+    let css = ":root {\n";
+
+    const rows = tableBody.querySelectorAll("tr");
+
+    rows.forEach(row => {
+
+        const variable = row.cells[0].textContent.trim();
+        const value = row.querySelector(".valueInput").value;
+
+        css += `    ${variable}: ${value};\n`;
+
+    });
+
+    css += "}";
+
+    const blob = new Blob([css], { type: "text/css" });
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "theme.css";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
 
 });
 </script>
