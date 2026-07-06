@@ -257,9 +257,7 @@ Built for One File Tools.
         </span>
         <div class="output-container"><code id="cssOutput"></code></div>
         <div class="unmatched" id="unmatchedBox" hidden></div>
-        <p class="hint">
-          Supports common utilities for spacing (<code>p-*</code>, <code>m-*</code>, <code>gap-*</code>), flex/grid layout, sizing, typography, color (a curated palette subset), borders, radius, and shadow. Arbitrary values like <code>w-[220px]</code> and responsive/state prefixes (<code>md:</code>, <code>hover:</code>) are converted using the base utility with a comment noting the prefix, since those need media queries or pseudo-classes that don't fit a single flat rule.
-        </p>
+        <p class="hint">Supports common utilities for spacing (<code>p-*</code>, <code>m-*</code>, <code>gap-*</code>), flex/grid layout, sizing, typography, color (a curated palette subset), borders, radius, and shadow. Arbitrary values like <code>w-[220px]</code> and responsive/state prefixes (<code>md:</code>, <code>hover:</code>) are converted using the base utility with a comment noting the prefix, since those need media queries or pseudo-classes that don't fit a single flat rule.</p>
       </main>
 
       <p class="footer-note">Part of <a href="https://github.com/praveenscience/One-File-Tools">One File Tools</a>. Runs completely offline.</p>
@@ -404,14 +402,17 @@ Built for One File Tools.
           "font-normal": [["font-weight", "400"]],
           italic: [["font-style", "italic"]],
           underline: [["text-decoration", "underline"]],
-          "uppercase": [["text-transform", "uppercase"]],
-          "lowercase": [["text-transform", "lowercase"]],
-          "capitalize": [["text-transform", "capitalize"]],
+          uppercase: [["text-transform", "uppercase"]],
+          lowercase: [["text-transform", "lowercase"]],
+          capitalize: [["text-transform", "capitalize"]],
           relative: [["position", "relative"]],
           absolute: [["position", "absolute"]],
           fixed: [["position", "fixed"]],
           sticky: [["position", "sticky"]],
-          "border": [["border-width", "1px"], ["border-style", "solid"]],
+          border: [
+            ["border-width", "1px"],
+            ["border-style", "solid"]
+          ],
           "w-full": [["width", "100%"]],
           "h-full": [["height", "100%"]],
           "w-screen": [["width", "100vw"]],
@@ -433,8 +434,16 @@ Built for One File Tools.
           if (value === undefined) return null;
           const signedValue = neg && value !== "0px" ? "-" + value : value;
           if (!axis) return [[prop, signedValue]];
-          if (axis === "x") return [[prop + "-left", signedValue], [prop + "-right", signedValue]];
-          if (axis === "y") return [[prop + "-top", signedValue], [prop + "-bottom", signedValue]];
+          if (axis === "x")
+            return [
+              [prop + "-left", signedValue],
+              [prop + "-right", signedValue]
+            ];
+          if (axis === "y")
+            return [
+              [prop + "-top", signedValue],
+              [prop + "-bottom", signedValue]
+            ];
           const sideMap = { t: "top", r: "right", b: "bottom", l: "left" };
           return [[prop + "-" + sideMap[axis], signedValue]];
         }
@@ -473,7 +482,10 @@ Built for One File Tools.
         match = cls.match(/^text-(.+)$/);
         if (match && FONT_SIZE[match[1]]) {
           const [size, lineHeight] = FONT_SIZE[match[1]];
-          return [["font-size", size], ["line-height", lineHeight]];
+          return [
+            ["font-size", size],
+            ["line-height", lineHeight]
+          ];
         }
 
         // Border radius: rounded, rounded-md, rounded-t-lg, etc. (corners simplified to full radius).

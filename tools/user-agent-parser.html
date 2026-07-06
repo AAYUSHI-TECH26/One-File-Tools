@@ -288,7 +288,7 @@ Built for One File Tools.
 
       <main class="studio">
         <label class="section-label" for="uaInput">User-Agent string</label>
-        <textarea id="uaInput" spellcheck="false" placeholder="Paste a User-Agent string here, or click &quot;Use current browser&quot;."></textarea>
+        <textarea id="uaInput" spellcheck="false" placeholder='Paste a User-Agent string here, or click "Use current browser".'></textarea>
         <div class="actions">
           <button class="btn" id="btnParse" type="button">Parse</button>
           <button class="btn-ghost" id="btnCurrent" type="button">Use current browser</button>
@@ -382,11 +382,11 @@ Built for One File Tools.
         if ((match = ua.match(/Windows NT ([\d.]+)/))) {
           const map = {
             "10.0": "10 / 11",
-            "6.3": "8.1",
-            "6.2": "8",
-            "6.1": "7",
+            6.3: "8.1",
+            6.2: "8",
+            6.1: "7",
             "6.0": "Vista",
-            "5.1": "XP"
+            5.1: "XP"
           };
           return { name: "Windows", version: map[match[1]] || match[1] };
         }
@@ -523,15 +523,7 @@ Built for One File Tools.
 
       btnCopyText.addEventListener("click", () => {
         if (!lastParsed) return;
-        const text = [
-          "Browser: " + lastParsed.browser,
-          "Rendering Engine: " + lastParsed.engine,
-          "Operating System: " + lastParsed.os,
-          "Device Type: " + lastParsed.device,
-          "CPU Architecture: " + lastParsed.architecture,
-          "",
-          "Raw: " + lastParsed.raw
-        ].join("\n");
+        const text = ["Browser: " + lastParsed.browser, "Rendering Engine: " + lastParsed.engine, "Operating System: " + lastParsed.os, "Device Type: " + lastParsed.device, "CPU Architecture: " + lastParsed.architecture, "", "Raw: " + lastParsed.raw].join("\n");
         copyText(text, "Copied as text!");
       });
 
