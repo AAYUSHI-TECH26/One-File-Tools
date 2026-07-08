@@ -332,7 +332,6 @@ function buildToolCards() {
       '<div class="card-foot">' +
       '<span class="badge-diff ' + diff + '">' + escapeHtml(t.difficulty) + '</span>' +
       '<span class="card-links">' +
-      '<a class="link-btn" href="tools/' + escapeAttr(t.id) + '.html" data-nomodal>Open</a>' +
       '<a class="link-btn primary" href="' + escapeAttr(liveUrl) + '" target="_blank" rel="noopener noreferrer" data-nomodal>Live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>' +
       '</span></div></div></article>';
   }).join("\n");
@@ -373,7 +372,6 @@ function buildQuestCards() {
       '<div class="card-foot">' +
       '<span class="badge-diff ' + diff + '">' + escapeHtml(q.difficulty) + '</span>' +
       '<span class="card-links">' +
-      '<a class="link-btn" href="quests/' + escapeAttr(q.id) + '.html" data-nomodal>Preview</a>' +
       '<a class="link-btn primary" href="' + escapeAttr(liveUrl) + '" target="_blank" rel="noopener noreferrer" data-nomodal>Start Quest <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>' +
       '</span></div></div></article>';
   }).join("\n");
