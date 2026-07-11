@@ -541,7 +541,7 @@ Built for One File Tools.
         if (answer.type === 16 && typeof answer.data === "string") {
           return answer.data.replace(/^"|"$/g, "");
         }
-        return answer.data;
+        return answer.data ?? "(no data)";
       }
 
       /** Maps DNS numeric type codes back to their mnemonic (A, MX, etc.). */
@@ -641,7 +641,7 @@ Built for One File Tools.
           nameTd.textContent = answer.name;
 
           const ttlTd = document.createElement("td");
-          ttlTd.textContent = answer.TTL + "s";
+          ttlTd.textContent = answer.TTL != null ? answer.TTL + "s" : "—";
 
           const dataTd = document.createElement("td");
           const recordData = formatRecordData(answer);
