@@ -95,7 +95,7 @@
       "status": "live"
     },
     {
-      "id": "event-loop-quest",
+      "id": "event-loop-arena",
       "name": "Event Loop Arena",
       "shortDescription": "Master JavaScript's async execution order through 10 levels covering sync, setTimeout, Promises, async/await, and microtask priority.",
       "longDescription": "## Event Loop Arena\n\nPredict the console output order of increasingly tricky JavaScript async code.\n\n### Levels\n\n1. Sync Basics\n2. Variables First\n3. setTimeout Intro\n4. Timeout Delay\n5. Promise Intro\n6. Promise vs Timeout\n7. Promise Chain\n8. Nested Promises\n9. async/await\n10. Final Challenge\n\n### Features\n\n- Multiple choice prediction challenges\n- Concept explanations after each level\n- Score and star rating system\n- Progress saved via localStorage\n- Dark mode support",
