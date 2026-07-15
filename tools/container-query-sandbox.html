@@ -1018,14 +1018,15 @@
         updateActiveBadges();
       }
       function updateActiveBadges() {
+        const borderOffset = 3; // 1.5px border each side with border-box
         state.rules.forEach((r) => {
           const badge = document.getElementById("badge-" + r.id);
           if (!badge) return;
           let active = false;
-          if (r.cond === "min-width") active = state.stageWidth >= r.value;
-          if (r.cond === "max-width") active = state.stageWidth <= r.value;
-          if (r.cond === "min-height") active = state.stageHeight >= r.value;
-          if (r.cond === "max-height") active = state.stageHeight <= r.value;
+          if (r.cond === "min-width") active = state.stageWidth - borderOffset >= r.value;
+          if (r.cond === "max-width") active = state.stageWidth - borderOffset <= r.value;
+          if (r.cond === "min-height") active = state.stageHeight - borderOffset >= r.value;
+          if (r.cond === "max-height") active = state.stageHeight - borderOffset <= r.value;
           badge.className = "rule-badge" + (active ? " active" : "");
           badge.innerHTML = ICON.dot + (active ? " active" : " inactive");
         });

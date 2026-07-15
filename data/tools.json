@@ -552,17 +552,24 @@
       "status": "live"
     },
     {
+      "id": "color-blindness-simulator",
       "name": "Color Blindness Simulator",
-      "filename": "color-blindness-simulator.html",
-      "category": "Color Tools",
-      "description": "Simulate how colors and images appear with Protanopia, Deuteranopia, Tritanopia, and Achromatopsia to design more accessible interfaces.",
+      "shortDescription": "Simulate how colors and images appear with Protanopia, Deuteranopia, Tritanopia, and Achromatopsia to design more accessible interfaces.",
+      "longDescription": "## Color Blindness Simulator\n\nSimulate how colors and images appear under different types of color vision deficiency. Upload an image or pick a color to see how it looks with Protanopia, Deuteranopia, Tritanopia, and Achromatopsia.\n\n### Features\n\n- Single HTML file\n- Works offline\n- Dark mode support\n- Responsive design",
+      "category": "color",
       "tags": [
         "accessibility",
         "color",
         "design",
         "vision"
       ],
-      "difficulty": "Medium"
+      "techStack": [
+        "CSS3",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Medium",
+      "status": "live"
     },
     {
       "id": "color-mixer-tool",

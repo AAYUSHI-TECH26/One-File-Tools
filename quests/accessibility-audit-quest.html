@@ -445,7 +445,7 @@
             if (nextPanel) {
                 setTimeout(() => {
                     const main = currentPanel.parentNode;
-                    main.insertBefore(nextPanel, currentPanel);
+                    main.insertBefore(nextPanel, currentPanel.nextElementSibling);
                     nextPanel.classList.remove('hidden');
                     nextPanel.classList.add('reveal');
                     nextPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
