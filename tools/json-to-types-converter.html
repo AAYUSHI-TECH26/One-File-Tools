@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JSON to Type Definitions Converter - One File Tools</title>
-    
+
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,11 +25,11 @@
         --radius-sm: 10px;
         --radius-md: 16px;
         --radius-lg: 24px;
-        
+
         --font-sans: "Inter", system-ui, -apple-system, sans-serif;
         --font-mono: "JetBrains Mono", monospace;
         --font-display: "Space Grotesk", sans-serif;
-        
+
         --badge-pass: #10b981;
         --badge-pass-bg: rgba(16, 185, 129, 0.12);
         --badge-fail: #ef4444;
@@ -45,9 +45,7 @@
       body {
         font-family: var(--font-sans);
         background-color: var(--bg-main);
-        background-image: 
-          linear-gradient(var(--grid-line) 1px, transparent 1px), 
-          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
         background-size: 32px 32px;
         color: var(--text-main);
         min-height: 100vh;
@@ -177,7 +175,10 @@
         font-weight: 500;
         font-size: 12px;
         cursor: pointer;
-        transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          box-shadow 0.2s;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -205,7 +206,7 @@
         display: inline-block;
       }
 
-      .file-input-wrapper input[type=file] {
+      .file-input-wrapper input[type="file"] {
         position: absolute;
         left: 0;
         top: 0;
@@ -372,7 +373,9 @@
         font-size: 13px;
         font-weight: 500;
         cursor: pointer;
-        transition: border-color 0.2s, color 0.2s;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
       }
 
       .lang-tab:hover {
@@ -401,7 +404,9 @@
         z-index: 200;
         transform: translateY(100px);
         opacity: 0;
-        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+        transition:
+          transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          opacity 0.3s;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -418,9 +423,7 @@
       <header>
         <span class="eyebrow">JSON & API</span>
         <h1 class="title">JSON to Type Definitions Converter</h1>
-        <p class="tagline">
-          Convert raw JSON payloads into strongly-typed code definitions for multiple programming languages entirely client-side.
-        </p>
+        <p class="tagline">Convert raw JSON payloads into strongly-typed code definitions for multiple programming languages entirely client-side.</p>
       </header>
 
       <div class="workspace">
@@ -458,7 +461,7 @@
 
         <!-- Right Column: Type Definitions Generator -->
         <div class="panel">
-          <div class="panel-header" style="border:none; padding-bottom: 0;">
+          <div class="panel-header" style="border: none; padding-bottom: 0">
             <span>Generated Definitions</span>
           </div>
 
@@ -466,11 +469,11 @@
           <div class="settings-card">
             <div class="settings-toggle" id="settingsToggle">
               <span>Configuration Controls</span>
-              <svg id="settingsArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;">
+              <svg id="settingsArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </div>
-            
+
             <div class="settings-grid" id="settingsGrid">
               <div class="settings-group">
                 <label class="settings-label" for="rootNameInput">Root Name</label>
@@ -497,7 +500,7 @@
                 </select>
               </div>
 
-              <div class="settings-group" style="justify-content: flex-end; gap: 8px;">
+              <div class="settings-group" style="justify-content: flex-end; gap: 8px">
                 <label class="checkbox-label">
                   <input type="checkbox" id="optionalCheckbox" />
                   Make all fields optional
@@ -525,11 +528,11 @@
             <button class="lang-tab" data-lang="csharp">C#</button>
           </div>
 
-          <div class="editor-wrapper" style="min-height: 380px;">
+          <div class="editor-wrapper" style="min-height: 380px">
             <pre class="code-viewport" id="codeOutput"></pre>
           </div>
 
-          <div class="panel-actions" style="justify-content: flex-end;">
+          <div class="panel-actions" style="justify-content: flex-end">
             <button class="btn" id="btnCopy">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -552,7 +555,7 @@
 
     <!-- Notification Toast -->
     <div class="toast" id="toast">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #10b981;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #10b981">
         <polyline points="20 6 9 17 4 12"></polyline>
       </svg>
       <span id="toastMessage">Copied to clipboard!</span>
@@ -599,7 +602,7 @@
       const jsonInput = document.getElementById("jsonInput");
       const codeOutput = document.getElementById("codeOutput");
       const jsonStatusBanner = document.getElementById("jsonStatusBanner");
-      
+
       const fileUpload = document.getElementById("fileUpload");
       const btnBeautify = document.getElementById("btnBeautify");
       const btnMinify = document.getElementById("btnMinify");
@@ -621,7 +624,7 @@
       const langTabs = document.getElementById("langTabs");
       const btnCopy = document.getElementById("btnCopy");
       const btnDownload = document.getElementById("btnDownload");
-      
+
       const toast = document.getElementById("toast");
       const toastMessage = document.getElementById("toastMessage");
 
@@ -648,7 +651,7 @@
         return str
           .replace(/[^a-zA-Z0-9]+/g, " ")
           .split(" ")
-          .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
           .join("");
       }
 
@@ -702,10 +705,7 @@
       }
 
       function escapeHtml(str) {
-        return String(str)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;");
+        return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
       }
 
       // ────────────────────────────────────────────────────────
@@ -732,7 +732,7 @@
           if (val.length === 0) {
             return new TypeNode("array", { elementType: new TypeNode("any") });
           }
-          let itemNodes = val.map(item => analyzeValue(item, keyName + "Item", ctx));
+          let itemNodes = val.map((item) => analyzeValue(item, keyName + "Item", ctx));
           let merged = itemNodes.reduce((acc, curr) => mergeNodes(acc, curr, keyName + "Item", ctx), itemNodes[0]);
           return new TypeNode("array", { elementType: merged });
         }
@@ -741,7 +741,7 @@
           for (let k in val) {
             fields[k] = analyzeValue(val[k], k, ctx);
           }
-          
+
           let node = new TypeNode("object", { fields });
           if (!ctx.settings.inlineTypes) {
             let uniqueName = ctx.getUniqueName(keyName);
@@ -785,7 +785,7 @@
             let obj1 = ctx.extractedObjects.get(n1.objectName);
             let obj2 = ctx.extractedObjects.get(n2.objectName);
             let mergedObj = mergeNodes(obj1, obj2, keyName, ctx);
-            
+
             let newName = ctx.getUniqueName(keyName);
             mergedObj.objectName = newName;
             ctx.extractedObjects.set(newName, mergedObj);
@@ -820,19 +820,19 @@
         } else {
           unionTypes.push(n1);
         }
-        
+
         if (n2.type === "union") {
           for (let ut of n2.unionTypes) {
-            if (!unionTypes.some(x => x.type === ut.type)) {
+            if (!unionTypes.some((x) => x.type === ut.type)) {
               unionTypes.push(ut);
             }
           }
         } else {
-          if (!unionTypes.some(x => x.type === n2.type)) {
+          if (!unionTypes.some((x) => x.type === n2.type)) {
             unionTypes.push(n2);
           }
         }
-        
+
         return new TypeNode("union", { unionTypes });
       }
 
@@ -861,11 +861,11 @@
       // ────────────────────────────────────────────────────────
       // Generators for Target Languages
       // ────────────────────────────────────────────────────────
-      
+
       // 1. TypeScript
       function generateTypeScript(rootNode, ctx) {
         let output = "";
-        
+
         if (!ctx.settings.inlineTypes) {
           ctx.extractedObjects.forEach((objNode, name) => {
             output += `export interface ${name} {\n`;
@@ -892,15 +892,24 @@
 
       function getTypeStringTS(node, ctx) {
         switch (node.type) {
-          case "string": return "string";
-          case "number": return "number";
-          case "integer": return "number";
-          case "boolean": return "boolean";
-          case "date": return "Date";
-          case "null": return "null";
-          case "any": return "any";
-          case "unknown": return "unknown";
-          case "reference": return node.objectName;
+          case "string":
+            return "string";
+          case "number":
+            return "number";
+          case "integer":
+            return "number";
+          case "boolean":
+            return "boolean";
+          case "date":
+            return "Date";
+          case "null":
+            return "null";
+          case "any":
+            return "any";
+          case "unknown":
+            return "unknown";
+          case "reference":
+            return node.objectName;
           case "array":
             let elementStr = getTypeStringTS(node.elementType, ctx);
             if (node.elementType.type === "union") {
@@ -908,7 +917,7 @@
             }
             return `${elementStr}[]`;
           case "union":
-            return node.unionTypes.map(t => getTypeStringTS(t, ctx)).join(" | ");
+            return node.unionTypes.map((t) => getTypeStringTS(t, ctx)).join(" | ");
           case "object":
             let s = "{\n";
             for (let k in node.fields) {
@@ -919,15 +928,16 @@
             }
             s += "}";
             return s;
-          default: return "any";
+          default:
+            return "any";
         }
       }
 
       // 2. Go
       function generateGo(rootNode, ctx) {
-        let output = "package main\n\nimport (\n\t\"time\"\n)\n\n";
+        let output = 'package main\n\nimport (\n\t"time"\n)\n\n';
         let hasDate = false;
-        
+
         // Scan for date usage to include import
         ctx.extractedObjects.forEach((objNode) => {
           for (let k in objNode.fields) {
@@ -960,15 +970,24 @@
       function getTypeStringGo(node, ctx, optional) {
         let prefix = optional ? "*" : "";
         switch (node.type) {
-          case "string": return prefix + "string";
-          case "number": return prefix + "float64";
-          case "integer": return prefix + "int";
-          case "boolean": return prefix + "bool";
-          case "date": return prefix + "time.Time";
-          case "null": return "interface{}";
-          case "any": return "interface{}";
-          case "unknown": return "interface{}";
-          case "reference": return prefix + node.objectName;
+          case "string":
+            return prefix + "string";
+          case "number":
+            return prefix + "float64";
+          case "integer":
+            return prefix + "int";
+          case "boolean":
+            return prefix + "bool";
+          case "date":
+            return prefix + "time.Time";
+          case "null":
+            return "interface{}";
+          case "any":
+            return "interface{}";
+          case "unknown":
+            return "interface{}";
+          case "reference":
+            return prefix + node.objectName;
           case "array":
             return `[]${getTypeStringGo(node.elementType, ctx, false)}`;
           case "union":
@@ -983,7 +1002,8 @@
             }
             s += "}";
             return prefix + s;
-          default: return "interface{}";
+          default:
+            return "interface{}";
         }
       }
 
@@ -1015,22 +1035,41 @@
       function getTypeStringRust(node, ctx, optional) {
         let baseType = "";
         switch (node.type) {
-          case "string": baseType = "String"; break;
-          case "number": baseType = "f64"; break;
-          case "integer": baseType = "i64"; break;
-          case "boolean": baseType = "bool"; break;
-          case "date": baseType = "String"; break;
-          case "null": baseType = "serde_json::Value"; break;
-          case "any": baseType = "serde_json::Value"; break;
-          case "unknown": baseType = "serde_json::Value"; break;
-          case "reference": baseType = node.objectName; break;
+          case "string":
+            baseType = "String";
+            break;
+          case "number":
+            baseType = "f64";
+            break;
+          case "integer":
+            baseType = "i64";
+            break;
+          case "boolean":
+            baseType = "bool";
+            break;
+          case "date":
+            baseType = "String";
+            break;
+          case "null":
+            baseType = "serde_json::Value";
+            break;
+          case "any":
+            baseType = "serde_json::Value";
+            break;
+          case "unknown":
+            baseType = "serde_json::Value";
+            break;
+          case "reference":
+            baseType = node.objectName;
+            break;
           case "array":
             return `Vec<${getTypeStringRust(node.elementType, ctx, false)}>`;
           case "union":
             return "serde_json::Value";
           case "object":
             return "std::collections::HashMap<String, serde_json::Value>";
-          default: return "serde_json::Value";
+          default:
+            return "serde_json::Value";
         }
         return optional ? `Option<${baseType}>` : baseType;
       }
@@ -1038,9 +1077,9 @@
       // 4. JSON Schema
       function generateJsonSchema(rootNode, ctx) {
         let schema = {
-          "$schema": "http://json-schema.org/draft-07/schema#",
-          "title": ctx.settings.rootName,
-          "type": "object"
+          $schema: "http://json-schema.org/draft-07/schema#",
+          title: ctx.settings.rootName,
+          type: "object"
         };
 
         if (!ctx.settings.inlineTypes && ctx.extractedObjects.size > 0) {
@@ -1052,22 +1091,30 @@
 
         let rootSchema = getJsonSchemaNode(rootNode, ctx, true);
         Object.assign(schema, rootSchema);
-        
+
         return JSON.stringify(schema, null, 2);
       }
 
       function getJsonSchemaNode(node, ctx, isRoot) {
         switch (node.type) {
-          case "string": return { type: "string" };
-          case "number": return { type: "number" };
-          case "integer": return { type: "integer" };
-          case "boolean": return { type: "boolean" };
-          case "date": return { type: "string", format: "date-time" };
-          case "null": return { type: "null" };
-          case "any": return {};
-          case "unknown": return {};
+          case "string":
+            return { type: "string" };
+          case "number":
+            return { type: "number" };
+          case "integer":
+            return { type: "integer" };
+          case "boolean":
+            return { type: "boolean" };
+          case "date":
+            return { type: "string", format: "date-time" };
+          case "null":
+            return { type: "null" };
+          case "any":
+            return {};
+          case "unknown":
+            return {};
           case "reference":
-            return { "$ref": `#/definitions/${node.objectName}` };
+            return { $ref: `#/definitions/${node.objectName}` };
           case "array":
             return {
               type: "array",
@@ -1075,7 +1122,7 @@
             };
           case "union":
             return {
-              anyOf: node.unionTypes.map(t => getJsonSchemaNode(t, ctx, false))
+              anyOf: node.unionTypes.map((t) => getJsonSchemaNode(t, ctx, false))
             };
           case "object":
             let properties = {};
@@ -1092,7 +1139,8 @@
               res.required = required;
             }
             return res;
-          default: return {};
+          default:
+            return {};
         }
       }
 
@@ -1123,22 +1171,32 @@
 
       function getTypeStringJsDoc(node, ctx) {
         switch (node.type) {
-          case "string": return "string";
-          case "number": return "number";
-          case "integer": return "number";
-          case "boolean": return "boolean";
-          case "date": return "Date";
-          case "null": return "null";
-          case "any": return "*";
-          case "unknown": return "*";
-          case "reference": return node.objectName;
+          case "string":
+            return "string";
+          case "number":
+            return "number";
+          case "integer":
+            return "number";
+          case "boolean":
+            return "boolean";
+          case "date":
+            return "Date";
+          case "null":
+            return "null";
+          case "any":
+            return "*";
+          case "unknown":
+            return "*";
+          case "reference":
+            return node.objectName;
           case "array":
             return `Array.<${getTypeStringJsDoc(node.elementType, ctx)}>`;
           case "union":
-            return node.unionTypes.map(t => getTypeStringJsDoc(t, ctx)).join("|");
+            return node.unionTypes.map((t) => getTypeStringJsDoc(t, ctx)).join("|");
           case "object":
             return "Object";
-          default: return "*";
+          default:
+            return "*";
         }
       }
 
@@ -1171,22 +1229,41 @@
       function getTypeStringPython(node, ctx, optional) {
         let baseType = "";
         switch (node.type) {
-          case "string": baseType = "str"; break;
-          case "number": baseType = "float"; break;
-          case "integer": baseType = "int"; break;
-          case "boolean": baseType = "bool"; break;
-          case "date": baseType = "str"; break;
-          case "null": baseType = "None"; break;
-          case "any": baseType = "Any"; break;
-          case "unknown": baseType = "Any"; break;
-          case "reference": baseType = node.objectName; break;
+          case "string":
+            baseType = "str";
+            break;
+          case "number":
+            baseType = "float";
+            break;
+          case "integer":
+            baseType = "int";
+            break;
+          case "boolean":
+            baseType = "bool";
+            break;
+          case "date":
+            baseType = "str";
+            break;
+          case "null":
+            baseType = "None";
+            break;
+          case "any":
+            baseType = "Any";
+            break;
+          case "unknown":
+            baseType = "Any";
+            break;
+          case "reference":
+            baseType = node.objectName;
+            break;
           case "array":
             return `List[${getTypeStringPython(node.elementType, ctx, false)}]`;
           case "union":
-            return `Union[${node.unionTypes.map(t => getTypeStringPython(t, ctx, false)).join(", ")}]`;
+            return `Union[${node.unionTypes.map((t) => getTypeStringPython(t, ctx, false)).join(", ")}]`;
           case "object":
             return "dict";
-          default: return "Any";
+          default:
+            return "Any";
         }
         return optional ? `Optional[${baseType}]` : baseType;
       }
@@ -1201,7 +1278,7 @@
             let fieldNode = objNode.fields[k];
             let csharpFieldName = toCsharpFieldName(k);
             let typeStr = getTypeStringCsharp(fieldNode, ctx, isFieldOptional(fieldNode, ctx));
-            
+
             output += `    [JsonPropertyName("${k}")]\n`;
             output += `    public ${typeStr} ${csharpFieldName} { get; set; }\n\n`;
           }
@@ -1215,41 +1292,53 @@
       }
 
       function getTypeStringCsharp(node, ctx, optional) {
-        let suffix = (optional && ["number", "integer", "boolean", "date"].includes(node.type)) ? "?" : "";
+        let suffix = optional && ["number", "integer", "boolean", "date"].includes(node.type) ? "?" : "";
         switch (node.type) {
-          case "string": return "string";
-          case "number": return "double" + suffix;
-          case "integer": return "int" + suffix;
-          case "boolean": return "bool" + suffix;
-          case "date": return "DateTime" + suffix;
-          case "null": return "object";
-          case "any": return "object";
-          case "unknown": return "object";
-          case "reference": return node.objectName;
+          case "string":
+            return "string";
+          case "number":
+            return "double" + suffix;
+          case "integer":
+            return "int" + suffix;
+          case "boolean":
+            return "bool" + suffix;
+          case "date":
+            return "DateTime" + suffix;
+          case "null":
+            return "object";
+          case "any":
+            return "object";
+          case "unknown":
+            return "object";
+          case "reference":
+            return node.objectName;
           case "array":
             return `List<${getTypeStringCsharp(node.elementType, ctx, false)}>`;
           case "union":
             return "object";
           case "object":
             return "Dictionary<string, object>";
-          default: return "object";
+          default:
+            return "object";
         }
       }
 
       // ────────────────────────────────────────────────────────
       // Core Controller & UI Orchestration
       // ────────────────────────────────────────────────────────
+      let toastTimer = null;
       function showToast(message) {
+        if (toastTimer) clearTimeout(toastTimer);
         toastMessage.textContent = message;
         toast.classList.add("active");
-        setTimeout(() => {
+        toastTimer = setTimeout(() => {
           toast.classList.remove("active");
         }, 2000);
       }
 
       function processConversion() {
         const valStr = jsonInput.value.trim();
-        
+
         // Handle empty payload
         if (valStr === "") {
           jsonStatusBanner.className = "status-banner";
@@ -1277,7 +1366,7 @@
               <line x1="12" y1="8" x2="12" y2="12"></line>
               <line x1="12" y1="16" x2="12.01" y2="16"></line>
             </svg>
-            <span>Invalid JSON: ${e.message}</span>
+            <span>Invalid JSON: ${escapeHtml(e.message)}</span>
           `;
           codeOutput.textContent = "";
           return;
@@ -1329,30 +1418,52 @@
 
       // Syntax Highlighter Engine
       function highlightCode(code, language) {
-        // Escape HTML
         let escaped = escapeHtml(code);
-        
-        // 1. Comments
-        escaped = escaped.replace(/(\/\*([\s\S]*?)\*\/|\/\/.*$|#.*$)/gm, '<span style="color:#5c6b84;font-style:italic;">$1</span>');
 
-        // 2. String Literals
-        escaped = escaped.replace(/(["'])(.*?)\1/g, '<span style="color:#d8b4fe;">$1$2$1</span>');
+        const keywords = ["export", "interface", "type", "struct", "class", "public", "private", "using", "namespace", "import", "from", "def", "TypedDict", "pub", "Option", "List", "dict", "str", "float", "bool", "int", "double", "float64", "string", "number", "boolean", "any", "unknown", "DateTime", "package"];
 
-        // 3. Keywords & Core types
-        const keywords = [
-          "export", "interface", "type", "struct", "class", "public", "private", "using", "namespace",
-          "import", "from", "def", "TypedDict", "pub", "Option", "List", "dict", "str", "float", "bool",
-          "int", "double", "float64", "string", "number", "boolean", "any", "unknown", "DateTime", "package"
+        // Single-pass tokenizer to avoid overlapping replacements
+        const patterns = [
+          { re: /\/\*[\s\S]*?\*\//g, style: "color:#5c6b84;font-style:italic;" },
+          { re: /\/\/.*$/gm, style: "color:#5c6b84;font-style:italic;" },
+          { re: /#\[.*?\]/g, style: "color:#fbbf24;" },
+          { re: /\[JsonPropertyName\(.*?\)\]/g, style: "color:#fbbf24;" },
+          { re: /`json:&quot;.*?&quot;`/g, style: "color:#34d399;" },
+          { re: /(["'])(?:(?!\1).)*\1/g, style: "color:#d8b4fe;" },
+          { re: new RegExp("\\b(" + keywords.join("|") + ")\\b", "g"), style: "color:#60a5fa;font-weight:600;" }
         ];
-        const kwRegex = new RegExp('\\b(' + keywords.join('|') + ')\\b', 'g');
-        escaped = escaped.replace(kwRegex, '<span style="color:#60a5fa;font-weight:600;">$1</span>');
 
-        // 4. Decorators / Serde / Custom tags
-        escaped = escaped.replace(/(#\[.*?\])/g, '<span style="color:#fbbf24;">$1</span>');
-        escaped = escaped.replace(/(\[JsonPropertyName\(.*?\)\])/g, '<span style="color:#fbbf24;">$1</span>');
-        escaped = escaped.replace(/(`json:".*?"`)/g, '<span style="color:#34d399;">$1</span>');
+        // Find all matches and sort by position
+        const tokens = [];
+        for (const p of patterns) {
+          let m;
+          const re = new RegExp(p.re.source, p.re.flags);
+          while ((m = re.exec(escaped)) !== null) {
+            tokens.push({ start: m.index, end: m.index + m[0].length, text: m[0], style: p.style });
+          }
+        }
+        tokens.sort((a, b) => a.start - b.start || b.end - a.end);
 
-        return escaped;
+        // Remove overlapping tokens (keep earlier/longer match)
+        const filtered = [];
+        let lastEnd = 0;
+        for (const t of tokens) {
+          if (t.start >= lastEnd) {
+            filtered.push(t);
+            lastEnd = t.end;
+          }
+        }
+
+        // Build output
+        let result = "";
+        let pos = 0;
+        for (const t of filtered) {
+          result += escaped.slice(pos, t.start);
+          result += '<span style="' + t.style + '">' + t.text + "</span>";
+          pos = t.end;
+        }
+        result += escaped.slice(pos);
+        return result;
       }
 
       function beautifyJson() {
@@ -1390,13 +1501,27 @@
         let extension = "";
 
         switch (activeLang) {
-          case "typescript": extension = ".ts"; break;
-          case "go": extension = ".go"; break;
-          case "rust": extension = ".rs"; break;
-          case "json_schema": extension = ".schema.json"; break;
-          case "jsdoc": extension = ".js"; break;
-          case "python": extension = ".py"; break;
-          case "csharp": extension = ".cs"; break;
+          case "typescript":
+            extension = ".ts";
+            break;
+          case "go":
+            extension = ".go";
+            break;
+          case "rust":
+            extension = ".rs";
+            break;
+          case "json_schema":
+            extension = ".schema.json";
+            break;
+          case "jsdoc":
+            extension = ".js";
+            break;
+          case "python":
+            extension = ".py";
+            break;
+          case "csharp":
+            extension = ".cs";
+            break;
         }
 
         const fullFilename = filename + extension;
@@ -1439,7 +1564,7 @@
         langTabs.addEventListener("click", (e) => {
           const tab = e.target.closest(".lang-tab");
           if (tab) {
-            langTabs.querySelectorAll(".lang-tab").forEach(t => t.classList.remove("active"));
+            langTabs.querySelectorAll(".lang-tab").forEach((t) => t.classList.remove("active"));
             tab.classList.add("active");
             activeLang = tab.dataset.lang;
 
@@ -1457,7 +1582,7 @@
         // Quick Actions
         btnBeautify.addEventListener("click", beautifyJson);
         btnMinify.addEventListener("click", minifyJson);
-        
+
         btnLoadSample.addEventListener("click", () => {
           jsonInput.value = SAMPLE_JSON;
           processConversion();
@@ -1469,19 +1594,20 @@
         });
 
         // File Drag & Drop
+        const editorWrapper = jsonInput.closest(".editor-wrapper");
         jsonInput.addEventListener("dragover", (e) => {
           e.preventDefault();
-          jsonInput.style.borderColor = "var(--accent)";
+          editorWrapper.style.borderColor = "var(--accent)";
         });
 
         jsonInput.addEventListener("dragleave", () => {
-          jsonInput.style.borderColor = "var(--panel-border)";
+          editorWrapper.style.borderColor = "";
         });
 
         jsonInput.addEventListener("drop", (e) => {
           e.preventDefault();
-          jsonInput.style.borderColor = "var(--panel-border)";
-          
+          editorWrapper.style.borderColor = "";
+
           const file = e.dataTransfer.files[0];
           if (file) {
             const reader = new FileReader();
@@ -1504,17 +1630,21 @@
             };
             reader.readAsText(file);
           }
+          e.target.value = "";
         });
 
         // Clipboard Copy
         btnCopy.addEventListener("click", () => {
           const code = codeOutput.textContent;
           if (!code) return;
-          navigator.clipboard.writeText(code).then(() => {
-            showToast("Copied to clipboard!");
-          }).catch(err => {
-            console.error("Clipboard copy failed", err);
-          });
+          navigator.clipboard
+            .writeText(code)
+            .then(() => {
+              showToast("Copied to clipboard!");
+            })
+            .catch((err) => {
+              console.error("Clipboard copy failed", err);
+            });
         });
 
         // Download Action
