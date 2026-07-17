@@ -1535,6 +1535,28 @@
       "status": "live"
     },
     {
+      "id": "glassmorphism-validator-glass",
+      "name": "Glassmorphism Validator v2",
+      "shortDescription": "Validate and generate frosted-glass UI effects for your components.",
+      "longDescription": "## Glassmorphism Validator\n\nA visual CSS validator that allows developers and designers to instantly create and validate frosted glass effects (glassmorphism) for UI components.\n\n### Features\n\n- Interactive sliders for blur radius, transparency (opacity), and saturation\n- Live preview area showing the glass effect overlaid on a vibrant background image or gradient\n- Color picker to adjust the glass tint (light vs dark glass)\n- Controls for border and shadow to enhance the 3D effect\n- One-click \"Copy CSS\" functionality for the generated code\n- Responsive and modern UI design\n- Works completely offline",
+      "category": "css",
+      "tags": [
+        "css",
+        "design",
+        "frontend",
+        "frosted-glass",
+        "generator",
+        "glassmorphism",
+        "ui"
+      ],
+      "techStack": [
+        "CSS3",
+        "Google Fonts",
+        "HTML5",
+        "Vanilla JS"
+      ]
+    },
+    {
       "id": "gradient-builder",
       "name": "Gradient Builder",
       "shortDescription": "Visually build linear or radial CSS gradients with multiple color stops and copy-ready CSS.",
