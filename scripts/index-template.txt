@@ -1271,6 +1271,7 @@
 
           <div class="contribute-cta">
             <p><strong>Want to see your tool here?</strong> Check the contributing guide and submit a PR.</p>
+            <a class="link-btn primary" href="new.html">Start Here — Contribution Wizard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
             <a class="link-btn primary" href="{{GITHUB_URL}}/blob/main/Contributing.md" target="_blank" rel="noopener noreferrer">Contributing Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
           </div>
         </section>
@@ -1341,6 +1342,7 @@
 
           <div class="contribute-cta">
             <p><strong>Want to add a quest?</strong> Check the quests contributing guide and submit a PR.</p>
+            <a class="link-btn primary" href="new.html">Start Here — Contribution Wizard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
             <a class="link-btn primary" href="{{GITHUB_URL}}/blob/main/quests/Contributing.md" target="_blank" rel="noopener noreferrer">Contributing Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
           </div>
         </section>
@@ -1373,6 +1375,7 @@
 
           <div class="contribute-cta">
             <p><strong>Want to showcase your design?</strong> Build a single-file UI using any CSS framework or JS library via CDN and submit a PR.</p>
+            <a class="link-btn primary" href="new.html">Start Here — Contribution Wizard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
             <a class="link-btn primary" href="{{GITHUB_URL}}/blob/main/Contributing.md" target="_blank" rel="noopener noreferrer">Contributing Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
           </div>
         </section>
@@ -1405,6 +1408,7 @@
 
           <div class="contribute-cta">
             <p><strong>Want to add a quiz?</strong> Check the quizzes contributing guide and submit a PR.</p>
+            <a class="link-btn primary" href="new.html">Start Here — Contribution Wizard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
             <a class="link-btn primary" href="{{GITHUB_URL}}/blob/main/quizzes/Contributing.md" target="_blank" rel="noopener noreferrer">Contributing Guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
           </div>
         </section>
