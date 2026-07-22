@@ -91,6 +91,10 @@
       let activeId = 1;
       const emojis = ["😀", "😂", "❤️", "👍", "🎉", "🔥", "😢", "😮", "🙏", "👏", "🚀", "✅"];
 
+      function escapeHtml(str) {
+        return String(str).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
+      }
+
       const html = document.documentElement;
       document.getElementById("themeToggle").addEventListener("click", () => html.classList.toggle("dark"));
       applyTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
@@ -117,7 +121,7 @@
                   <p class="font-medium text-sm text-slate-900 dark:text-white truncate">${c.name}</p>
                   <span class="text-xs text-slate-400 shrink-0 ml-2">${last.time}</span>
                 </div>
-                <p class="text-xs text-slate-400 truncate">${last.from === "me" ? "You: " : ""}${last.text}</p>
+                <p class="text-xs text-slate-400 truncate">${last.from === "me" ? "You: " : ""}${escapeHtml(last.text)}</p>
               </div>
             `;
             row.addEventListener("click", () => {
@@ -146,7 +150,7 @@
             return `
               <div class="bubble-in flex ${mine ? "justify-end" : "justify-start"}">
                 <div class="max-w-[70%] ${mine ? "bg-brand-600 text-white" : "bg-white dark:bg-slate-800 text-slate-900 dark:text-white"} rounded-2xl px-4 py-2 shadow-sm">
-                  <p class="text-sm">${m.text}</p>
+                  <p class="text-sm">${escapeHtml(m.text)}</p>
                   <p class="text-[10px] mt-1 ${mine ? "text-white/70" : "text-slate-400"}">${m.time}${mine ? (m.read ? " · Read" : " · Sent") : ""}</p>
                 </div>
               </div>

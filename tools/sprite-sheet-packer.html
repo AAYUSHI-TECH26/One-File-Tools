@@ -1254,6 +1254,9 @@
         nextPowerOfTwo(n) {
           return Math.pow(2, Math.ceil(Math.log2(n)));
         },
+        escapeHtml(str) {
+          return String(str).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+        },
         cleanCssName(name) {
           return name
             .replace(/\.[^/.]+$/, "")
@@ -1269,7 +1272,7 @@
             li.innerHTML = `
 <div class="asset-thumb" style="background-image: url('${img.objectUrl}')"></div>
 <div class="asset-details">
-<span class="asset-name" title="${img.name}">${img.name}</span>
+<span class="asset-name" title="${this.escapeHtml(img.name)}">${this.escapeHtml(img.name)}</span>
 <span class="asset-dim">${img.width} × ${img.height}</span>
 </div>
 <button class="btn-icon btn-delete" title="Remove Asset">
@@ -1322,7 +1325,7 @@ Select a packed sprite to inspect its properties
 <div class="prop-grid">
 <div class="prop-card prop-full">
 <span class="prop-lbl">Source File</span>
-<span class="prop-val" title="${s.image.name}">${s.image.name}</span>
+<span class="prop-val" title="${this.escapeHtml(s.image.name)}">${this.escapeHtml(s.image.name)}</span>
 </div>
 <div class="prop-card prop-full">
 <span class="prop-lbl">CSS Identifier</span>

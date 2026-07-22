@@ -178,7 +178,8 @@ Every tool in this collection is a standalone `.html` file containing all the HT
 | 149 | [Web Vitals Jank Profiler](tools/web-vitals-jank-profiler.html) | Developer Utilities | A live performance diagnostics environment that uses PerformanceObserver to capture, visualize, and debug INP, LCP, and CLS events in real time. | [Try it](https://one-file-tools.pages.dev/tools/web-vitals-jank-profiler) |
 | 150 | [WebSocket & SSE Sandbox Client](tools/websocket-sse-sandbox.html) | Browser & Network | A developer client to connect to, inspect, send messages to, and debug WebSocket connections and Server-Sent Events (SSE) streams in real time. | [Try it](https://one-file-tools.pages.dev/tools/websocket-sse-sandbox) |
 | 151 | [Word / Character Counter](tools/word-character-counter.html) | Text & Content | Real-time word, character, and sentence counter for text of any length. | [Try it](https://one-file-tools.pages.dev/tools/word-character-counter) |
-| 152 | [YAML / JSON Converter](tools/yaml-json-converter.html) | JSON & API | Convert between YAML and JSON in either direction, with validation and pretty-printed output. | [Try it](https://one-file-tools.pages.dev/tools/yaml-json-converter) |
+| 152 | [XPath Tester](tools/xpath-tester.html) | Developer Utilities | Test XPath expressions against XML documents instantly, offline. | [Try it](https://one-file-tools.pages.dev/tools/xpath-tester) |
+| 153 | [YAML / JSON Converter](tools/yaml-json-converter.html) | JSON & API | Convert between YAML and JSON in either direction, with validation and pretty-printed output. | [Try it](https://one-file-tools.pages.dev/tools/yaml-json-converter) |
 
 > **Want to see your tool here?** Use the [Contribution Wizard](https://one-file-tools.pages.dev/new) for a guided walkthrough, or check the [Contributing Guide](Contributing.md) and pick an idea from the [Ideas Board](#ideas-board).
 
