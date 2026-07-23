@@ -1772,6 +1772,29 @@
       "status": "live"
     },
     {
+      "id": "hreflang-tag-generator-retro",
+      "name": "Hreflang Tag Generator (Retro)",
+      "shortDescription": "Generate valid hreflang link tags with a retro CRT terminal aesthetic.",
+      "longDescription": "## Hreflang Tag Generator (Retro)\n\nA retro CRT terminal-styled variant of the Hreflang Tag Generator. Same functionality — generate copy-ready HTML, XML Sitemap, or HTTP Header hreflang tags for multilingual websites — wrapped in a phosphor-green scanline aesthetic.\n\n### Features\n\n- Multiple language and region entries with live validation\n- ISO language and region validation with inline errors\n- x-default support with URL validation\n- HTML, XML Sitemap, and HTTP Header output formats\n- Duplicate hreflang code detection\n- Non-blocking validation warnings and best-practice hints\n- Copy, download, and share controls\n- Light/dark theme toggle with localStorage persistence\n- Keyboard shortcuts for all actions\n- CRT scanline overlay and phosphor glow effects\n- Runs completely offline",
+      "category": "web-seo",
+      "tags": [
+        "generator",
+        "hreflang",
+        "html",
+        "international",
+        "retro",
+        "seo"
+      ],
+      "techStack": [
+        "CSS3",
+        "Google Fonts",
+        "HTML5",
+        "Vanilla JS"
+      ],
+      "difficulty": "Easy",
+      "status": "live"
+    },
+    {
       "id": "html-entity-converter",
       "name": "HTML Entity Converter",
       "shortDescription": "Encode text into named, decimal, or hex HTML entities, or decode entities back into readable text.",

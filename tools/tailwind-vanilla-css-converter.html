@@ -546,7 +546,10 @@ Built for One File Tools.
         return { declarations, unmatched };
       }
 
-      /** Renders the declarations as a CSS rule block and lists unmatched classes. */
+      function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      }
+
       function render() {
         const selector = selectorInput.value.trim() || ".element";
         const { declarations, unmatched } = convertClasses(classInput.value);
@@ -560,7 +563,7 @@ Built for One File Tools.
 
         if (unmatched.length > 0) {
           unmatchedBox.hidden = false;
-          unmatchedBox.innerHTML = "Not recognized (skipped): " + unmatched.map((c) => "<code>" + c + "</code>").join(", ");
+          unmatchedBox.innerHTML = "Not recognized (skipped): " + unmatched.map((c) => "<code>" + escapeHtml(c) + "</code>").join(", ");
         } else {
           unmatchedBox.hidden = true;
         }
